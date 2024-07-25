@@ -139,6 +139,44 @@ func main() {
 	// Enums
 
 	//Functions
+
+	myArray := []int{1, 2, 3}
+	fmt.Println("___________________________________")
+	AddNormal(myArray)
+	Add(&myArray)
+	fmt.Println(myArray)
+
+	myMap := map[int]string{
+		1: "Holi",
+		2: "Chau",
+	}
+	AddKey(myMap)
+	fmt.Println(myMap)
+}
+
+func Add(input *[]int) {
+	(*input)[0] = 10
+
+	newArr := append(*input, 23)
+	*input = newArr
+}
+
+func AddNormal(input []int) {
+	input[0] = 10
+
+	input = append(input, 69)
+
+	input[0] = 55
+}
+
+func AddKey(input map[int]string) {
+	input[10] = "Dito"
+
+	input = map[int]string{
+		3: "Hola mundo",
+	}
+
+	input[10] = "Dito2"
 }
 
 // Custom types

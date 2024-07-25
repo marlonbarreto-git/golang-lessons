@@ -15,7 +15,7 @@ func concatenarMultiple(input ...string) (outputA string, outputB int) {
 		outputB += i
 	}
 
-	return outputA, outputB
+	return
 }
 
 func sumarConcatenar[T int | string](input ...T) (sum T) {
@@ -23,7 +23,34 @@ func sumarConcatenar[T int | string](input ...T) (sum T) {
 		sum += t
 	}
 
-	return sum
+	return
+}
+
+type Number interface {
+	int | ~int
+}
+
+type NumeroPotente int
+
+func (NumeroPotente) String() string {
+	return fmt.Sprint("Potente")
+}
+
+func imprimir[T any](item T) {
+	fmt.Println(item)
+}
+
+func imprimirNumero[T Number](item T) {
+	fmt.Println(item)
+}
+
+func MapArray[Input any, Output any](arrayA []Input, fn func(Input) Output) (arrayOut []Output) {
+	for _, input := range arrayA {
+		mappedOutput := fn(input)
+		arrayOut = append(arrayOut, mappedOutput)
+	}
+
+	return
 }
 
 func medirDuracion[T any](fn func() T) (T, time.Duration) {
@@ -32,6 +59,15 @@ func medirDuracion[T any](fn func() T) (T, time.Duration) {
 	tiempoFinal := time.Now().UnixNano()
 
 	return resultado, time.Duration(tiempoFinal - tiempoDeInicio)
+}
+
+func ConnectDB() (db string, closeConn func()) {
+	var err error
+
+	return "database", func() {
+		time.Sleep(1 * time.Second)
+		fmt.Println("Closing connection ...", err)
+	}
 }
 
 func potencia(base float64, exponente float64) (resultado float64) {
@@ -64,8 +100,25 @@ func main() {
 		"es un lenguaje de programacion",
 	}
 
-	texto, numeroDeCadenas := concatenarMultiple(ejemplo...)
+	texto, numeroDeCadenas := concatenarMultiple()
 	fmt.Printf("Cadenas: %d\nTexto: %s\n", numeroDeCadenas, texto)
+
+	texto, numeroDeCadenas = concatenarMultiple(ejemplo...)
+	fmt.Printf("Cadenas: %d\nTexto: %s\n", numeroDeCadenas, texto)
+
+	imprimir[uint64](1)
+	imprimir("Hola Dito")
+	imprimir(map[string]string{
+		"Hola": "Mundo",
+	})
+
+	db, closeFunc := ConnectDB()
+	fmt.Println(db)
+	closeFunc()
+
+	var miNumeroPotente NumeroPotente = 10
+
+	imprimirNumero(miNumeroPotente)
 
 	texto2 := sumarConcatenar(ejemplo...)
 	fmt.Printf("Texto: %s\n", texto2)

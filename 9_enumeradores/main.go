@@ -36,6 +36,7 @@ func (e Estado) SiguienteEstado(isValid ...bool) Estado {
 
 func main() {
 	fmt.Println(Inicial) // Imprime ´Inicial´ en lugar de 0 al haber implementado el metodo string
+	fmt.Println(Inicial.SiguienteEstado().SiguienteEstado().SiguienteEstado().SiguienteEstado())
 	fmt.Println(Procesando.SiguienteEstado(true))
 	fmt.Println(Procesando.SiguienteEstado())
 }
