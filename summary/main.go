@@ -247,3 +247,11 @@ type (
 
 	WrapperFunc func()
 )
+
+// Ejercicio:
+// Temas:
+//	-> Variables - Condicionales - Switches - Casteo de Types (algo.(int))
+//	-> Collectiones - Arrays - Slices - Maps
+//	-> Tipos - Alias - Wrapper types
+//	-> Funciones - Generics
+//	-> Enumeradores
