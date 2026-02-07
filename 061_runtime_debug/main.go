@@ -456,3 +456,38 @@ type UptimeVar struct {
 func (u *UptimeVar) String() string {
 	return fmt.Sprintf("%.0f", time.Since(u.start).Seconds())
 }
+
+/*
+SUMMARY - RUNTIME, DEBUG & DIAGNOSTICS:
+
+RUNTIME/DEBUG - BUILD INFO:
+- debug.ReadBuildInfo() returns GoVersion, module path, dependencies, build settings
+- Build settings include compiler, GOARCH, GOOS, vcs.revision, vcs.time
+
+RUNTIME/DEBUG - GC CONTROL:
+- debug.SetGCPercent to adjust GC aggressiveness (100 default, -1 disables)
+- debug.SetMemoryLimit for soft memory limit (Go 1.19+)
+- debug.FreeOSMemory forces memory return to OS
+- debug.Stack() and PrintStack() for stack traces
+
+RUNTIME/METRICS (Go 1.16+):
+- metrics.All() lists all available runtime metrics
+- metrics.Read(samples) reads specific metric values
+- Categories: /gc/*, /memory/*, /sched/*, /cpu/*, /godebug/*
+- Value types: Uint64, Float64, Float64Histogram
+
+RUNTIME/TRACE:
+- trace.Start/Stop for execution tracing
+- trace.NewTask and trace.WithRegion for structured tracing
+- Analyze with: go tool trace trace.out
+
+EXPVAR - PUBLISHED MONITORING VARIABLES:
+- expvar.NewInt, NewFloat, NewString, NewMap for atomic variables
+- expvar.Publish for custom types implementing Var interface
+- Auto-registers /debug/vars HTTP endpoint with JSON output
+- Includes cmdline and memstats by default
+
+RUNTIME DASHBOARD:
+- runtime.Version, GOOS, GOARCH, NumCPU, NumGoroutine, GOMAXPROCS
+- runtime.ReadMemStats for Alloc, TotalAlloc, Sys, HeapObjects, NumGC
+*/

@@ -386,3 +386,23 @@ pprof, trace, benchstat
 race detector, vet
 golangci-lint
 */
+
+/*
+SUMMARY - CHAPTER 100: Performance
+
+TOPIC: Performance Optimization and Profiling
+- CPU profiling: go test -cpuprofile, runtime/pprof.StartCPUProfile(), analyze with pprof tool (top10, list, web)
+- Memory profiling: go test -memprofile, pprof.WriteHeapProfile(), find allocations and memory leaks
+- Execution tracing: runtime/trace for goroutine scheduling, GC events, network I/O, blocking operations
+- HTTP profiling: net/http/pprof automatic endpoints, access /debug/pprof/ for live profiling
+- Memory optimization: Pre-allocate slices with make([]T, 0, capacity), sync.Pool for buffer reuse
+- Escape analysis: go build -gcflags="-m" shows heap allocations, avoid returning pointers for stack allocation
+- String optimization: Use strings.Builder with Grow() for concatenation, []byte for mutable operations
+- Struct padding: Arrange fields by size (largest first) to minimize memory waste from alignment
+- Concurrency optimization: Sharded maps to reduce lock contention, atomic for simple counters, buffered channels
+- GC tuning: GOGC (default 100), GOMEMLIMIT for soft memory limit, runtime.ReadMemStats() for diagnostics
+- Compiler optimizations: Inlining for small functions, bounds check elimination, escape analysis for stack allocation
+- Benchmarking: b.ResetTimer() to exclude setup, assign result to global to prevent dead code elimination
+- benchstat: Statistical comparison of benchmark results, detects significant performance changes
+- Best practices: Profile before optimizing, use benchstat for comparisons, run with -count=10 for stability
+*/

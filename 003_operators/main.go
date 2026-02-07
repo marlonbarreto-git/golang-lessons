@@ -228,6 +228,97 @@ func main() {
 	var underflow uint8 = 0
 	underflow--
 	fmt.Printf("uint8(0) - 1 = %d (underflow silencioso)\n", underflow)
+
+	// ============================================
+	// BITWISE PATTERNS AND TRICKS
+	// ============================================
+	fmt.Println("\n--- Patrones con Operaciones de Bits ---")
+
+	// Check if a number is even or odd using bitwise AND
+	for _, val := range []int{1, 2, 3, 4, 5, 6} {
+		if val&1 == 0 {
+			fmt.Printf("%d es par (AND con 1 = 0)\n", val)
+		} else {
+			fmt.Printf("%d es impar (AND con 1 = 1)\n", val)
+		}
+	}
+
+	// Swap two numbers without a temporary variable using XOR
+	fmt.Println("\nSwap con XOR:")
+	swapA, swapB := 10, 25
+	fmt.Printf("Antes: a=%d, b=%d\n", swapA, swapB)
+	swapA ^= swapB
+	swapB ^= swapA
+	swapA ^= swapB
+	fmt.Printf("Después: a=%d, b=%d\n", swapA, swapB)
+
+	// Check if a number is a power of 2
+	fmt.Println("\nVerificar potencia de 2:")
+	for _, val := range []int{1, 2, 3, 4, 8, 15, 16, 32, 100} {
+		isPow2 := val > 0 && val&(val-1) == 0
+		fmt.Printf("%3d: potencia de 2 = %t\n", val, isPow2)
+	}
+
+	// Set, clear, and toggle specific bits
+	fmt.Println("\nManipulación de bits individuales:")
+	flags := uint8(0b00000000)
+	fmt.Printf("Inicial:       %08b\n", flags)
+
+	flags |= (1 << 3) // Set bit 3
+	fmt.Printf("Set bit 3:     %08b\n", flags)
+
+	flags |= (1 << 5) // Set bit 5
+	fmt.Printf("Set bit 5:     %08b\n", flags)
+
+	flags &^= (1 << 3) // Clear bit 3
+	fmt.Printf("Clear bit 3:   %08b\n", flags)
+
+	flags ^= (1 << 5) // Toggle bit 5
+	fmt.Printf("Toggle bit 5:  %08b\n", flags)
+
+	flags ^= (1 << 5) // Toggle bit 5 again
+	fmt.Printf("Toggle bit 5:  %08b\n", flags)
+
+	// Count set bits (population count / Hamming weight)
+	fmt.Println("\nContar bits encendidos:")
+	testVal := uint8(0b10110101)
+	count := 0
+	temp := testVal
+	for temp != 0 {
+		count += int(temp & 1)
+		temp >>= 1
+	}
+	fmt.Printf("%08b tiene %d bits encendidos\n", testVal, count)
+
+	// ============================================
+	// OPERATOR PRECEDENCE TABLE
+	// ============================================
+	fmt.Println("\n--- Tabla Completa de Precedencia ---")
+	fmt.Println(`
+Precedencia (mayor a menor):
+┌────────┬──────────────────────────────┐
+│ Nivel  │ Operadores                   │
+├────────┼──────────────────────────────┤
+│   5    │ *  /  %  <<  >>  &  &^       │
+│   4    │ +  -  |  ^                   │
+│   3    │ ==  !=  <  <=  >  >=         │
+│   2    │ &&                           │
+│   1    │ ||                           │
+└────────┴──────────────────────────────┘
+Nota: Los operadores unarios (+, -, !, ^, &, *)
+      tienen la mayor precedencia de todas.`)
+
+	// Practical example of precedence in action
+	fmt.Println("\nEjemplos prácticos de precedencia:")
+	r1 := 2 | 3&4   // & tiene mayor precedencia que |
+	r2 := (2 | 3) & 4
+	fmt.Printf("2 | 3&4 = %d (& primero)\n", r1)
+	fmt.Printf("(2 | 3) & 4 = %d (| primero por paréntesis)\n", r2)
+
+	r3 := 1<<2 + 3  // << tiene mayor precedencia que +
+	r4 := 1 << (2 + 3)
+	fmt.Printf("1<<2 + 3 = %d (<< primero)\n", r3)
+	fmt.Printf("1<<(2+3) = %d (+ primero por paréntesis)\n", r4)
 }
 
 // Función costosa que no queremos ejecutar innecesariamente
@@ -249,4 +340,41 @@ OPERADORES QUE NO EXISTEN EN GO:
 - ?: (operador ternario) - usa if/else
 - ++x, --x (pre-incremento/decremento)
 - x++ como expresión (solo statement)
+*/
+
+/*
+SUMMARY - OPERATORS:
+
+OPERADORES ARITMÉTICOS:
+- +, -, *, / (división entera para int), % (módulo)
+- Operadores unarios: +x, -x
+- ++, -- son statements (no expresiones)
+
+OPERADORES DE COMPARACIÓN:
+- ==, !=, <, >, <=, >=
+- Strings se comparan lexicográficamente
+
+OPERADORES LÓGICOS:
+- && (AND), || (OR), ! (NOT)
+- Short-circuit evaluation: false && ... no evalúa el segundo
+
+OPERADORES BIT A BIT:
+- & (AND), | (OR), ^ (XOR), ^x (NOT/complemento)
+- &^ (AND NOT / bit clear)
+- << (shift left), >> (shift right)
+
+OPERADORES DE ASIGNACIÓN:
+- =, +=, -=, *=, /=, %=
+- &=, |=, ^=, <<=, >>=
+
+PATRONES CON BITS:
+- Verificar par/impar: n&1 == 0
+- Potencia de 2: n > 0 && n&(n-1) == 0
+- Set/clear/toggle bits individuales
+- Swap con XOR sin variable temporal
+
+CASOS ESPECIALES:
+- División entera por cero causa panic
+- División flotante por cero da Inf, 0.0/0.0 da NaN
+- Overflow/underflow silencioso en enteros sin signo
 */

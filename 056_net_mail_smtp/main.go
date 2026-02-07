@@ -440,3 +440,33 @@ func (kv *KeyValueStore) Keys(_ struct{}, reply *[]string) error {
 	*reply = keys
 	return nil
 }
+
+/*
+SUMMARY - NET/MAIL, NET/SMTP & NET/RPC:
+
+NET/MAIL - EMAIL PARSING:
+- mail.ParseAddress and ParseAddressList for RFC 5322 addresses
+- mail.ReadMessage parses headers + body from io.Reader
+- mail.ParseDate for RFC 2822 date formats
+- Header.Get, Header.Date, Header.AddressList for field access
+
+NET/SMTP - EMAIL SENDING:
+- smtp.SendMail for simple sending with PlainAuth or CRAMMD5Auth
+- smtp.NewClient for manual SMTP flow: Hello, StartTLS, Auth, Mail, Rcpt, Data, Quit
+- SMTP flow: connect -> EHLO -> STARTTLS -> AUTH -> MAIL FROM -> RCPT TO -> DATA -> QUIT
+
+NET/RPC - REMOTE PROCEDURE CALLS:
+- rpc.Register to expose service methods (exported type, exported method, args + *reply, returns error)
+- rpc.NewServer and server.ServeConn for custom servers
+- client.Call for synchronous, client.Go for asynchronous calls
+- net.Pipe() for in-process testing without network
+
+NET/RPC/JSONRPC:
+- JSON codec for language-interoperable RPC
+- jsonrpc.NewClient and jsonrpc.NewServerCodec
+- Same API as gob-encoded RPC but human-readable
+
+STATEFUL RPC SERVICE:
+- Services can maintain internal state (maps, counters)
+- KeyValueStore example with Set, Get, Keys methods
+*/

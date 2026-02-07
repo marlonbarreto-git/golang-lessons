@@ -426,3 +426,19 @@ _archivo.go
 .archivo.go
 testdata/
 */
+
+/* SUMMARY - CHAPTER 064: Build Tags
+Topics covered in this chapter:
+
+• Build tag syntax: //go:build constraint directive at top of files
+• Boolean operators: && (AND), || (OR), ! (NOT), () for grouping
+• Predefined tags: GOOS (linux, darwin, windows), GOARCH (amd64, arm64), go1.XX versions
+• File naming conventions: file_GOOS.go, file_GOARCH.go, file_GOOS_GOARCH.go
+• Custom tags: defining and using custom build tags with -tags flag
+• Common patterns: optional features, environment configs, database drivers, arch optimizations
+• Conditional compilation: including/excluding code based on platform or environment
+• Testing with tags: integration, slow, !unit patterns
+• Build commands: go build -tags "tag1 tag2", go test -tags integration
+• Ignoring files: //go:build ignore, underscore prefix, dot prefix, testdata directory
+• Use cases: platform-specific code, feature flags, test separation
+*/

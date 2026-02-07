@@ -598,3 +598,24 @@ ESTE CURSO CUBRIÓ:
 
 ¡Felicidades por completar el curso!
 */
+
+/*
+SUMMARY - CHAPTER 106: Final Project
+
+TOPIC: Complete REST API with Production Best Practices
+- Clean Architecture: Separation of concerns with internal/ structure (domain, repository, service, handler)
+- Domain layer: Business entities (Task), validation logic, domain errors (ErrTaskNotFound, ErrInvalidTask)
+- Repository pattern: Interface-based data access, PostgreSQL implementation, context support, error handling
+- Service layer: Business logic, validation, orchestration between repository and handlers, domain operations
+- Handler layer: HTTP request/response, JSON encoding, error mapping, query parameters, path variables
+- HTTP routing: Go 1.22+ pattern matching (GET /tasks/{id}), method-specific routes, clean handler registration
+- Middleware: Logging (request/response details), recovery (panic handling), composable middleware chain
+- Database integration: sql.DB with connection pooling, context timeouts, prepared statements, transaction support
+- Configuration: Environment variables with struct tags, validation, defaults, 12-factor app compliance
+- Graceful shutdown: signal.Notify for SIGINT/SIGTERM, server.Shutdown with timeout, resource cleanup
+- Docker multi-stage: Build with golang image, run with alpine/distroless, non-root user, minimal image size
+- Docker Compose: Service orchestration (app + db), health checks, depends_on with condition, volume persistence
+- CI/CD: GitHub Actions for tests, linting, automated releases, GoReleaser for multi-platform builds
+- Makefile: Build, test, run, docker, migrate commands for developer workflow automation
+- Course completion: From basics to production (fundamentals, concurrency, testing, web, databases, deployment)
+*/

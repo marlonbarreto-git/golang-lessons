@@ -683,3 +683,28 @@ COMPRESIÓN:
 - EnableCompression para mensajes grandes
 - Trade-off CPU vs bandwidth
 */
+
+/* SUMMARY - WEBSOCKETS FOR REAL-TIME COMMUNICATION:
+
+TOPIC: Building bidirectional real-time applications with WebSockets in Go
+- WebSocket provides full-duplex communication over TCP unlike request-response HTTP
+- gorilla/websocket is the de facto standard, battle-tested library
+- nhooyr/websocket offers modern context-aware API alternative
+- Upgrader converts HTTP connection to WebSocket with ReadBufferSize and WriteBufferSize
+- Hub pattern for chat rooms with clients map and broadcast channel
+- ReadPump goroutine for receiving messages, WritePump for sending
+- Ping/Pong frames for keepalive with SetReadDeadline and SetPongHandler
+- Client struct contains connection, send channel, and hub reference
+- Message types: TextMessage and BinaryMessage
+- JSON messaging with ReadJSON and WriteJSON methods
+- Multiple rooms support with map of room ID to clients
+- Scalability with Redis Pub/Sub for cross-server broadcasting
+- Authentication at upgrade time via token in query params or headers
+- Rate limiting per client with golang.org/x/time/rate limiter
+- SetReadLimit to prevent large message attacks
+- Compression with EnableCompression for text messages over network
+- Testing with httptest.NewServer converting http:// to ws:// URL
+- Graceful disconnect detection with ping timeout
+- CheckOrigin function to validate allowed origins for security
+- Session management across multiple WebSocket instances
+*/

@@ -2180,3 +2180,44 @@ TABLE-DRIVEN FACTORY:
 - Register() para extensibilidad
 - Combina Factory + table-driven testing style
 */
+
+/* SUMMARY - DESIGN PATTERNS EN GO:
+
+TOPIC: Patrones de diseño idiomáticos para Go
+
+FUNCTIONAL OPTIONS:
+- Construcción flexible con defaults (type Option func(*Config))
+- Usado por grpc.Dial, zap.New y bibliotecas estándar
+
+BUILDER:
+- Method chaining para construir objetos complejos paso a paso
+- Ideal para query builders, request builders
+
+FACTORY & SINGLETON:
+- Factory: funciones New*() que retornan interfaces
+- Singleton: sync.Once para inicialización thread-safe única
+
+STRATEGY & OBSERVER:
+- Strategy: interfaces para algoritmos intercambiables
+- Observer: channels para pub/sub (más idiomático que callbacks)
+
+DECORATOR (MIDDLEWARE):
+- func(Handler) Handler para composición de comportamiento
+- Stack de middlewares en HTTP servers
+
+ADAPTER & REPOSITORY:
+- Adapter: convertir interfaces legacy a nuevas
+- Repository: abstraer acceso a datos (SQL/NoSQL/Memory)
+
+DEPENDENCY INJECTION:
+- Constructor injection sin frameworks
+- Wire (codegen) o Fx (runtime) para proyectos grandes
+
+CONFIGURATION & SHUTDOWN:
+- 12-Factor: env vars, Viper para proyectos complejos
+- Graceful shutdown con signal.NotifyContext y srv.Shutdown()
+
+HEALTH CHECKS:
+- /livez: proceso vivo (Kubernetes liveness)
+- /readyz: puede recibir tráfico (Kubernetes readiness)
+*/

@@ -539,3 +539,27 @@ RECOMENDACIONES:
 2. Wails para UIs web-like
 3. Gio para rendimiento crítico
 */
+
+/* SUMMARY - DESKTOP APPLICATIONS IN GO:
+
+TOPIC: Creating cross-platform desktop applications with Go GUI frameworks
+- Three main frameworks: Fyne (pure Go), Wails (Go + Web), Gio (immediate mode)
+- Fyne uses Material Design, no CGO required, cross-platform including mobile
+- Fyne widgets: Label, Button, Entry, Check, Radio, Select, Slider
+- Fyne layouts: VBox, HBox, Grid, Border, Tabs, Split containers
+- Fyne dialogs: ShowInformation, ShowConfirm, ShowFileOpen, ShowFileSave
+- Data binding in Fyne with binding.NewString() for reactive UI updates
+- fyne package command for building platform-specific bundles
+- Wails combines Go backend with HTML/CSS/JavaScript frontend using native WebView
+- wails init creates project with React, Vue, Svelte, or vanilla JavaScript
+- Wails binds Go methods automatically callable from JavaScript
+- EventsEmit and EventsOn for bidirectional communication in Wails
+- wails dev for hot reload development, wails build for production
+- Gio uses immediate mode rendering with high performance and GPU acceleration
+- Gio layout system with layout.Context and custom rendering control
+- systray package for system tray icons with menu items
+- Distribution: Windows (.exe, NSIS), macOS (.app, DMG, notarization), Linux (AppImage, Flatpak, Snap)
+- goreleaser for automated multi-platform builds
+- Binary sizes: Wails ~8MB, Gio ~10MB, Fyne ~15MB
+- Choose Fyne for simplicity, Wails for web-like UI, Gio for performance
+*/

@@ -490,3 +490,35 @@ func statusStr(passed bool) string {
 	}
 	return "ALGUNO FALLO"
 }
+
+/*
+SUMMARY - TESTING STDLIB UTILITIES:
+
+TESTING/IOTEST - SPECIAL READERS FOR EDGE CASES:
+- HalfReader reads only half the requested bytes
+- OneByteReader reads exactly 1 byte at a time
+- DataErrReader returns error alongside final data
+- ErrReader always returns a specified error
+- TimeoutReader simulates timeout on second read
+- NewReadLogger/NewWriteLogger for debugging I/O
+- TestReader validates io.Reader implementations thoroughly
+
+TESTING/FSTEST - VIRTUAL FILESYSTEM:
+- fstest.MapFS is an in-memory fs.FS implementation
+- Supports Open, ReadFile, ReadDir, Glob, Stat operations
+- MapFile with Data, Mode, ModTime fields
+- fstest.TestFS validates custom fs.FS implementations
+- Ideal for testing code that accepts fs.FS interface
+
+PROPERTY-BASED TESTING (MANUAL):
+- Verify invariant properties for any input
+- reverse(reverse(s)) == s, sort is idempotent
+- len(split(s, sep)) >= 1 for any string and separator
+- Generate random inputs and check properties hold
+
+TESTDATA AND GOLDEN FILES PATTERN:
+- testdata/ directory ignored by go build
+- Golden files store expected output for comparison
+- -update flag to regenerate golden files
+- Compare actual output vs stored golden file
+*/

@@ -431,3 +431,39 @@ BUENAS PRÁCTICAS:
 6. Usa embedding para composición, no para "herencia"
 7. Cuidado con copiar structs con campos referencia
 */
+
+/*
+SUMMARY - STRUCTS:
+
+DEFINICIÓN Y CREACIÓN:
+- type Nombre struct { Campo Tipo }
+- Instancias: literal con campos, sin nombres, parcial
+- Zero value: todos los campos con sus zero values
+
+ACCESO Y MODIFICACIÓN:
+- Dot notation: persona.Nombre
+- Con punteros: dereferencia automática (ptr.Campo)
+- Structs anónimos para datos temporales y tests
+
+MÉTODOS:
+- Receptor valor: func (r Tipo) Metodo() (copia)
+- Receptor puntero: func (r *Tipo) Metodo() (modifica)
+- Sé consistente: todos valor o todos puntero
+
+EMBEDDING (Composición):
+- Incrustar structs sin nombre de campo
+- Campos y métodos se "promueven" al nivel superior
+- Composición sobre herencia (no hay herencia en Go)
+- Colisiones se resuelven explícitamente
+
+STRUCT TAGS:
+- Metadatos para serialización: `json:"nombre" db:"col"`
+- json:"-" omite campo, omitempty omite si vacío
+- Acceso via reflect.TypeOf(s).FieldByName("F").Tag.Get("json")
+
+PATRONES:
+- Constructores New* para inicialización compleja
+- Opciones funcionales: WithPort(8080), WithTimeout(30)
+- struct{} para sets y señalización (0 bytes)
+- Comparables si todos los campos son comparables
+*/

@@ -556,3 +556,28 @@ EXTRAS:
 - Health checks
 - Reflection para debugging
 */
+
+/* SUMMARY - GRPC FOR HIGH-PERFORMANCE RPC:
+
+TOPIC: Building efficient microservices with gRPC and Protocol Buffers
+- gRPC uses Protocol Buffers for serialization and HTTP/2 for transport
+- Installation requires protoc, protoc-gen-go, and protoc-gen-go-grpc tools
+- Proto files define messages and services with syntax proto3
+- Four RPC types: Unary (single request/response), Server streaming, Client streaming, Bidirectional
+- Code generation with protoc --go_out and --go-grpc_out flags
+- Server implements UnimplementedXxxServer for forward compatibility
+- grpc.NewServer() creates server, RegisterXxxServer binds implementation
+- Client created with grpc.NewClient and credentials configuration
+- Context with timeout for every RPC call mandatory
+- Interceptors are middleware: UnaryInterceptor and StreamInterceptor
+- Error handling with status.Errorf and gRPC status codes
+- Metadata for request/response headers via metadata package
+- TLS with credentials.NewServerTLSFromFile and NewClientTLSFromFile
+- Mutual TLS (mTLS) for client certificate authentication
+- gRPC-Gateway exposes gRPC as REST API using google/api/annotations
+- Health checks with grpc_health_v1 service
+- Streaming receives with stream.Recv(), sends with stream.Send()
+- SendAndClose for client streaming, EOF detection for server streaming
+- Status codes: OK, InvalidArgument, NotFound, PermissionDenied, Unauthenticated, Internal
+- HTTP/2 benefits: multiplexing, header compression, server push
+*/

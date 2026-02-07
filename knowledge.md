@@ -1,15 +1,16 @@
 # Knowledge - Curso Go de 0 a Ninja 2026
 
-## Estado: COMPLETO (126 capítulos)
-- **Fecha**: 2026-02-06
+## Estado: COMPLETO (132 capítulos)
+- **Fecha**: 2026-02-07
 - **Autor**: Marlon Barreto <mbarretot@hotmail.com>
 
 ## Verificación
-- `go build -o /dev/null ./...` → ALL PASS (126/126)
+- `go build -o /dev/null ./...` → ALL PASS (132/132)
 - `go vet ./...` → 4 warnings intencionales (002, 003, 024)
+- Format validation script → 0 violations (5 rules checked)
 - Sin Claude co-author
 
-## Estructura (126 capítulos, 18 partes)
+## Estructura (132 capítulos, 19 partes)
 
 ### Part I: Language Basics (001-010)
 001-hello_world, 002-variables_constants, 003-operators, 004-conditionals,
@@ -73,13 +74,16 @@
 100-performance, 101-observability, 102-debugging_diagnostics, 103-cicd_tooling,
 104-deploy, 105-ai_ml, 106-proyecto_final
 
-### Part XVII: Major Go Projects (107-124)
+### Part XVII: Major Go Projects (107-130)
 107-docker, 108-kubernetes, 109-etcd, 110-terraform, 111-prometheus,
 112-grafana, 113-caddy, 114-hugo, 115-traefik, 116-coredns, 117-consul,
 118-vault, 119-cockroachdb, 120-nats, 121-minio, 122-gitea,
-123-badger_boltdb, 124-cilium
+123-badger_boltdb, 124-cilium, 127-ollama, 128-tidb, 129-istio, 130-milvus
 
-### Part XVIII: Philosophy & Mastery (125-126)
+### Part XVIII: Advanced Testing & Modern Features (131-132)
+131-property_testing, 132-json_v2
+
+### Part XIX: Philosophy & Mastery (125-126)
 125-go_proverbs_mistakes, 126-go_mastery_path
 
 ## Cobertura Total
@@ -87,12 +91,12 @@
 - Data structures: slices deep dive, maps deep dive, sort, container/heap/list/ring, slices/maps/cmp
 - Method sets, receivers, interface internals
 - Concurrency: goroutines, channels, select, context, sync, atomic, patterns
-- Testing: unit, benchmarks, mocking, fuzzing, testify, gomock, integration, testing stdlib
+- Testing: unit, benchmarks, mocking, fuzzing, property-based testing, testify, gomock, testing stdlib
 - Stdlib essentials: fmt, strings, strconv, bytes, io, bufio, os, os/exec, flag, path/filepath,
   unicode/utf8, hash/fnv/crc32/maphash, log/slog, time, regexp, encoding/*, templates
 - Stdlib advanced: math/big/bits, archive/compress, crypto/*, net/mail, text/scanner/tabwriter,
   go/ast/parser/token, testing/quick/iotest/fstest, runtime/debug
-- Modern Go: iterators, embed, build tags, Go 1.24/1.25/1.26 features
+- Modern Go: iterators, embed, build tags, Go 1.24/1.25/1.26, encoding/json/v2
 - Advanced: reflection, code generation, unsafe, cgo, go assembly, plugin, expvar, wasm
 - Web: HTTP server/client, gRPC, WebSockets, GraphQL, REST APIs, networking
 - Data: databases, Redis, Kafka, NATS, RabbitMQ, CSV, JSON, XML, Parquet, images, audio
@@ -102,6 +106,7 @@
 - Production: performance, profiling, observability, deploy, CI/CD, debugging, diagnostics
 - golang.org/x/: sync, net, crypto, text, oauth2, term, sys, mod, tools
 - Major Go projects: Docker, Kubernetes, etcd, Terraform, Prometheus, Grafana, Caddy, Hugo,
-  Traefik, CoreDNS, Consul, Vault, CockroachDB, NATS, Minio, Gitea, Badger/BoltDB, Cilium
+  Traefik, CoreDNS, Consul, Vault, CockroachDB, NATS, Minio, Gitea, Badger/BoltDB, Cilium,
+  Ollama, TiDB, Istio, Milvus
 - Philosophy: Go proverbs, common mistakes, mastery path, career paths, community
 - Go versions: 1.23, 1.24, 1.25, 1.26

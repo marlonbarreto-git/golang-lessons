@@ -361,3 +361,60 @@ ATOMIC:
 var counter atomic.Int64
 counter.Add(1) / counter.Load() / counter.Store(0)
 */
+
+/*
+SUMMARY - CHAPTER 034: SYNC PACKAGE
+
+MUTEX:
+- Mutual exclusion lock
+- Lock() before accessing shared data
+- Unlock() when done (use defer)
+- Use for critical sections
+
+RWMUTEX:
+- Read-write mutex
+- Multiple readers OR one writer
+- RLock()/RUnlock() for reads
+- Lock()/Unlock() for writes
+- Better for read-heavy workloads
+
+WAITGROUP:
+- Wait for collection of goroutines
+- Add(n) before launching
+- Done() when goroutine completes
+- Wait() blocks until counter reaches zero
+- Go(fn) convenience method (Go 1.25+)
+
+ONCE:
+- Execute function exactly once
+- Thread-safe initialization
+- Common for singletons
+
+POOL:
+- Reusable object pool
+- Reduce allocation overhead
+- GC can clear pool contents
+- Typical for buffers, connections
+
+COND:
+- Condition variable
+- Wait for condition with mutex
+- Signal() or Broadcast() to wake waiters
+- Rarely needed, prefer channels
+
+SYNC.MAP:
+- Concurrent map
+- Better than map + RWMutex for specific cases
+- Store, Load, Delete, Range
+- LoadOrStore, LoadAndDelete
+
+ATOMIC:
+- Lock-free atomic operations
+- atomic.Int64, atomic.Pointer, etc.
+- Add, Load, Store, CompareAndSwap
+- Faster than mutex for simple counters
+
+GO 1.21+ ADDITIONS:
+- OnceFunc, OnceValue, OnceValues
+- Simplified once patterns
+*/

@@ -866,3 +866,38 @@ func demoMiniMinIO() {
 
 // Ensure all imports are used
 var _ = io.Copy
+
+/*
+SUMMARY - MINIO: HIGH PERFORMANCE OBJECT STORAGE IN GO:
+
+WHAT IS MINIO:
+- High-performance S3-compatible object storage in pure Go
+- Erasure coding for data protection, bitrot detection and healing
+- Encryption, multi-site replication, Kubernetes-native deployment
+- Used by VMware, Nutanix, Red Hat for enterprise storage
+
+ARCHITECTURE:
+- Layers: S3 API -> Object Layer -> Erasure Coding -> Storage (XL) -> Disk
+- Reed-Solomon erasure coding splits objects into data + parity shards
+- Can survive loss of up to N parity drives and still recover data
+
+KEY GO PATTERNS DEMONSTRATED:
+- Erasure Coding: XOR-based encoding with shard reconstruction
+- Object Storage: bucket/key management with S3-compatible metadata
+- Multipart Upload: concurrent part uploads with ordered assembly
+- Bitrot Detection: SHA-256 checksumming on every data block
+- S3 API Simulation: PutObject, GetObject, ListObjects, DeleteObject
+
+PERFORMANCE TECHNIQUES:
+- Direct I/O bypassing OS page cache for large objects
+- Parallel disk I/O with goroutines and errgroup
+- Inline small objects (<128KB) in metadata for fewer IOPS
+- Streaming architecture: constant memory regardless of object size
+- SIMD-accelerated erasure coding (AVX2/NEON) with Go fallback
+
+GO PHILOSOPHY:
+- Single binary with zero external dependencies
+- io.Reader/io.Writer throughout for zero-copy streaming
+- Goroutines for parallel disk operations across all shards
+- Graceful partial failure handling in erasure-coded writes
+*/

@@ -1316,3 +1316,22 @@ Patrones practicos:
 - Nonce management con limites de GCM
 - PEM encoding para serializar claves
 */
+
+/* SUMMARY - CHAPTER 055: Cryptography
+Topics covered in this chapter:
+
+• crypto/rand: cryptographically secure random number generation with Reader
+• Hashing: SHA-256, SHA-512 for integrity, never for passwords
+• HMAC: message authentication codes for verifying data authenticity
+• AES-GCM encryption: authenticated encryption with associated data (AEAD)
+• Nonce management: unique nonces per encryption, limits for GCM rekey
+• RSA encryption and signatures: OAEP for encryption, PSS for signatures, envelope encryption
+• ECDSA: elliptic curve signatures with P-256, smaller keys than RSA
+• Ed25519: modern deterministic signatures, fast and side-channel resistant
+• x509 certificates: public key infrastructure, certificate chains, PEM/DER formats
+• TLS configuration: tls.Config, MinVersion TLS 1.2, mTLS for mutual authentication
+• Key derivation: Argon2id (recommended), bcrypt, PBKDF2, scrypt for password hashing
+• crypto/subtle: ConstantTimeCompare for timing attack prevention
+• FIPS 140-3: boringcrypto for compliance, approved algorithms only
+• Best practices: envelope encryption, hybrid encryption, proper nonce management, PEM encoding
+*/

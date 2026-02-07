@@ -334,3 +334,50 @@ BUENAS PRÁCTICAS:
 6. Propagar siempre el context
 7. Verificar ctx.Done() en loops
 */
+
+/*
+SUMMARY - CHAPTER 033: CONTEXT
+
+CONTEXT PURPOSE:
+- Carry cancellation signals across API boundaries
+- Set deadlines and timeouts
+- Pass request-scoped values
+- Essential for well-behaved concurrent programs
+
+CONTEXT TYPES:
+- Background(): root context, never canceled
+- TODO(): placeholder when unsure what to use
+- WithCancel(): manual cancellation
+- WithTimeout(): automatic timeout
+- WithDeadline(): deadline at specific time
+- WithValue(): carry request-scoped data
+
+METHODS:
+- Done() <-chan struct{}: closed when canceled
+- Err() error: why canceled (Canceled or DeadlineExceeded)
+- Deadline() (time.Time, bool): deadline if set
+- Value(key) any: retrieve stored value
+
+CANCELLATION:
+- Call cancel() to propagate cancellation
+- Always defer cancel() even if timeout expires
+- Check ctx.Done() in long operations
+- Use select with ctx.Done() for responsiveness
+
+WITHVALUE USAGE:
+- Use custom types as keys, not strings
+- Only for request-scoped data (user ID, trace ID)
+- Not for optional parameters (use explicit params)
+
+CONTEXT IN HTTP:
+- r.Context() provides request context
+- Canceled when client disconnects
+- Propagate to all downstream operations
+
+BEST PRACTICES:
+- First parameter: func(ctx context.Context, ...)
+- Never store context in struct
+- Always call cancel(), even on timeout
+- Use custom types for WithValue keys
+- Check ctx.Done() in loops and long operations
+*/

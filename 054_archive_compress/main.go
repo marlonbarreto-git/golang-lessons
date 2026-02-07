@@ -369,3 +369,35 @@ func methodName(method uint16) string {
 		return fmt.Sprintf("Unknown(%d)", method)
 	}
 }
+
+/*
+SUMMARY - ARCHIVE & COMPRESS:
+
+ARCHIVE/TAR:
+- tar.NewWriter creates tar archives with WriteHeader + Write per file
+- tar.NewReader reads with Next() loop until io.EOF
+- tar.Header: Name, Size, Mode, ModTime, Typeflag (TypeReg, TypeDir)
+
+ARCHIVE/ZIP:
+- zip.NewWriter with Create (simple) or CreateHeader (custom metadata)
+- zip.NewReader/OpenReader to read, iterate File slice, call Open()
+- Supports Deflate compression method, directory entries end with /
+
+COMPRESS/GZIP (RFC 1952):
+- gzip wrapper around deflate with name/comment/OS metadata
+- NewWriterLevel with BestSpeed to BestCompression levels
+- NewReader to decompress, always Close() writer to flush
+
+COMPRESS/ZLIB (RFC 1950):
+- Lighter than gzip (less overhead), used by PNG, HTTP deflate
+- Same API pattern: NewWriter/NewReader with level options
+
+COMPRESS/FLATE (RFC 1951):
+- Raw deflate algorithm, base of gzip and zlib
+- Levels: NoCompression(0) to BestCompression(9), HuffmanOnly(-2)
+
+PRACTICAL PATTERNS:
+- tar.gz streaming: gzip.Writer wrapping tar.Writer
+- ZIP with directory structure using trailing / in names
+- Compression comparison across gzip/zlib/flate formats
+*/

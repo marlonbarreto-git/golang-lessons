@@ -2784,3 +2784,54 @@ var (
 	_ = sync.Mutex{}
 	_ = time.Now
 )
+
+/*
+SUMMARY - CHAPTER 085: GRAPHQL IN GO
+
+GRAPHQL VS REST:
+- Single endpoint, client requests exactly what it needs
+- No over-fetching or under-fetching, no URL versioning
+- Schema is self-documenting via introspection
+
+SCHEMA DEFINITION LANGUAGE (SDL):
+- Types: Query, Mutation, Subscription, Object, Input, Enum, Interface, Union
+- Scalars: Int, Float, String, Boolean, ID; custom: DateTime, Upload, JSON
+- Modifiers: ! (non-null), [] (list), [Type!]! (non-null list of non-null)
+
+GQLGEN (RECOMMENDED):
+- Schema-first with code generation from .graphqls files
+- Generates types, resolver interfaces; you implement business logic
+- Workflow: define schema -> gqlgen generate -> implement resolvers
+- Supports subscriptions via WebSocket transport
+
+DATALOADERS (N+1 PREVENTION):
+- Problem: N+1 queries when resolving related fields
+- Solution: batch + cache per-request using dataloadgen
+- Must create dataloaders per-request via middleware, not shared
+
+PAGINATION:
+- Cursor-based (Relay spec): Connection + Edges + PageInfo
+- Base64 encoded cursors, forward/backward pagination
+
+SECURITY:
+- Query depth limiting, complexity analysis per field
+- Persisted queries, introspection disabled in production
+- Auth middleware injecting user into context
+- Directive-based authorization (@auth)
+
+ERROR HANDLING:
+- GraphQL returns partial data + errors array
+- gqlerror.Error with extensions for typed error codes
+- Error presenter for production error masking
+- Field-level errors with graphql.AddError
+
+FEDERATION:
+- Apollo Federation v2 supported in gqlgen
+- @key for entities, @external/@requires/@provides for cross-service fields
+- Apollo Router as gateway composing subgraphs
+
+CLIENTS:
+- machinebox/graphql (simple), shurcooL/graphql (type-safe)
+- hasura/go-graphql-client (type-safe + subscriptions)
+- Khan/genqlient (type-safe with code generation)
+*/

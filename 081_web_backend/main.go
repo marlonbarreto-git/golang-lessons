@@ -530,3 +530,27 @@ BUENAS PRÁCTICAS:
 6. Health checks
 7. HTTPS
 */
+
+/* SUMMARY - WEB BACKEND WITH NET/HTTP IN GO:
+
+TOPIC: Building production-ready HTTP servers with Go
+- net/http provides HTTP server in standard library with goroutines per request
+- http.Server with ReadTimeout, WriteTimeout, IdleTimeout configuration required
+- Always use custom client instead of http.DefaultClient
+- ServeMux for basic routing, handler signature: func(w http.ResponseWriter, r *http.Request)
+- Middleware pattern: func(next http.Handler) http.Handler wrapping ServeHTTP
+- Context propagation for cancellation and request-scoped values
+- Graceful shutdown with signal.Notify and server.Shutdown(ctx)
+- JSON helpers: json.NewEncoder(w).Encode() and json.NewDecoder(r.Body).Decode()
+- User CRUD example with in-memory store protected by sync.RWMutex
+- Popular frameworks: chi (stdlib-compatible), fiber (Express-like), gin (batteries-included), echo (balanced)
+- Mini router implementation showing HTTP method routing
+- Testing with httptest.NewServer and httptest.NewRecorder
+- Middleware types: logging, recovery (panic handling), CORS, authentication
+- Best practices: timeouts mandatory, validate all input, separate business logic
+- Health checks and metrics endpoints standard
+- Input validation before processing requests
+- Always close response bodies when making outbound HTTP calls
+- Connection pooling and keep-alive for performance
+- TLS/HTTPS in production environments
+*/

@@ -864,6 +864,43 @@ func (ew *errWriter) write(buf []byte) {
 	_, ew.err = ew.w.Write(buf)
 }
 
+/*
+SUMMARY - GO PROVERBS AND COMMON MISTAKES:
+
+GO PROVERBS (ROB PIKE):
+- Share memory by communicating (channels for data flow, mutex for state)
+- Concurrency is not parallelism (design vs execution property)
+- Channels orchestrate; mutexes serialize
+- The bigger the interface, the weaker the abstraction (prefer 1-method interfaces)
+- Make the zero value useful (bytes.Buffer, sync.Mutex work without init)
+- interface{}/any says nothing (prefer specific types or interfaces)
+- Gofmt's style is no one's favorite, yet everyone's favorite
+- A little copying is better than a little dependency
+- Errors are values (programmable, composable, inspectable)
+- Don't just check errors, handle them gracefully (wrap with context)
+- Don't panic (only for programmer bugs, not expected errors)
+
+COMMON MISTAKES:
+- Writing to nil map (always initialize with make)
+- Goroutine leaks (use buffered channels or context cancellation)
+- Slice shared backing array (copy for independence)
+- Defer in loop (extract to separate function)
+- Closure over loop variable (fixed in Go 1.22, shadow trick for older)
+- HTTP body not closed (always defer resp.Body.Close after error check)
+- String concatenation in loop (use strings.Builder instead)
+- Embedding sync.Mutex (keep as private field, don't export Lock/Unlock)
+- time.After in select loop (reuse timer to prevent memory leak)
+- Ignoring context (always propagate to I/O operations)
+
+EFFECTIVE GO PRINCIPLES:
+- Accept interfaces, return structs
+- Return early to reduce nesting
+- Short lowercase package names (no utilities/common/helpers)
+- Table-driven tests for comprehensive coverage
+- Composition over inheritance
+- Keep main thin (delegate to testable run function)
+*/
+
 // demonstrateStringConcat muestra el rendimiento de strings.Builder
 func demonstrateStringConcat() {
 	items := []string{"Go", " ", "is", " ", "awesome"}

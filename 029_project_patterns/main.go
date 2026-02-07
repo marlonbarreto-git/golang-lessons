@@ -11,6 +11,9 @@ import (
 func main() {
 	fmt.Println("=== PATRONES DE PROYECTO ===")
 
+	// ============================================
+	// ESTRUCTURAS DE PROYECTO COMUNES
+	// ============================================
 	fmt.Println(`
 ESTRUCTURAS DE PROYECTO COMUNES EN GO
 
@@ -358,6 +361,9 @@ logger.Info("request processed",
     "path", "/users",
     "duration", time.Since(start),
 )`)
+	// ============================================
+	// EJEMPLO COMPLETO: API REST
+	// ============================================
 	fmt.Println("\n--- Ejemplo Completo: API REST ---")
 
 	os.Stdout.WriteString(`
@@ -439,4 +445,49 @@ BUENAS PRÁCTICAS:
 4. Structured logging (slog)
 5. Graceful shutdown
 6. Health checks
+*/
+
+/*
+SUMMARY - CHAPTER 029: PROJECT PATTERNS
+
+PROJECT STRUCTURES:
+- Flat: simple scripts and small tools
+- Layered: medium APIs with handler/service/repository layers
+- Standard Layout: large projects with cmd/, internal/, pkg/
+- DDD: complex domains with domain-driven design
+- Clean/Hexagonal: maximum decoupling with ports and adapters
+
+STANDARD DIRECTORIES:
+- cmd/: application entry points (main packages)
+- internal/: private application code
+- pkg/: public reusable libraries
+- api/: OpenAPI specs, Protocol Buffers
+- web/: web assets and templates
+- scripts/: build and setup scripts
+- deployments/: Docker, Kubernetes configs
+
+DESIGN PATTERNS:
+- Dependency Injection: inject interfaces, not concrete types
+- Repository: abstract data access layer
+- Service Layer: business logic coordination
+- Options Pattern: functional options for configuration
+- Factory: create instances based on runtime conditions
+- Singleton: single instance with sync.Once
+
+CONFIGURATION:
+- Load from environment variables
+- Use struct tags for parsing
+- Separate config from code
+
+ERROR HANDLING:
+- Define sentinel errors
+- Wrap errors with context
+- Custom error types with Unwrap()
+
+BEST PRACTICES:
+- Interfaces in consumer packages
+- Inject dependencies via constructors
+- Use structured logging (slog)
+- Implement graceful shutdown
+- Add health check endpoints
 */

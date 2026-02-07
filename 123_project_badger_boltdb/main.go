@@ -1094,3 +1094,47 @@ func demoMiniEmbeddedDB() {
 // Ensure all imports are used
 var _ = binary.BigEndian
 var _ = os.Stdout
+
+/*
+SUMMARY - BADGER AND BOLTDB: EMBEDDED KEY-VALUE STORES IN GO:
+
+BOLTDB (BBOLT):
+- B+ tree based embedded key-value store in pure Go
+- ACID transactions with MVCC, memory-mapped reads (mmap)
+- Single writer, multiple readers model
+- Used by etcd, Consul, InfluxDB for metadata storage
+
+BADGER:
+- LSM tree + value log (WiscKey design) for high write throughput
+- Separates keys from values to reduce write amplification
+- Concurrent reads and writes with built-in garbage collection
+- Used by Dgraph, Milvus for high-performance storage
+
+KEY GO PATTERNS DEMONSTRATED:
+- B+ Tree: ordered key-value storage with range scans and leaf splitting
+- LSM Tree: memtable flushing to SSTables with bloom filters and compaction
+- Transaction Closures: db.Update()/db.View() pattern for safe transactions
+- Write-Ahead Log: CRC32 checksummed entries for crash recovery
+- Dual Engine: unified API over both BoltDB-style and Badger-style backends
+
+BOLTDB API:
+- db.Update(func(tx) error) for read-write transactions
+- db.View(func(tx) error) for read-only transactions
+- Bucket-based organization with B+ tree per bucket
+
+BADGER API:
+- db.Update(func(txn) error) for read-write transactions
+- db.View(func(txn) error) for read-only transactions
+- Buffered writes committed atomically on success
+
+PERFORMANCE TECHNIQUES:
+- BoltDB: mmap for zero-copy reads, copy-on-write B+ tree, page-aligned I/O
+- Badger: key-value separation, bloom filters, parallel compaction goroutines
+- Both: pure Go (no CGo), transaction closures prevent resource leaks
+
+GO PHILOSOPHY:
+- Pure Go with no C dependencies for easy cross-compilation
+- Idiomatic transaction closure API prevents misuse
+- Embed as a Go package: import, open file, use database
+- Interfaces for testing and mock implementations
+*/

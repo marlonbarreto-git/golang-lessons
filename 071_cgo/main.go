@@ -359,3 +359,20 @@ BUENAS PRÁCTICAS:
 3. Documentar dependencias C
 4. Considerar alternativas puras Go
 */
+
+/* SUMMARY - CHAPTER 071: CGO
+Topics covered in this chapter:
+
+• CGO basics: import "C" for accessing C code from Go
+• Special comments: using // comments before import "C" for C code and includes
+• Build directives: #cgo CFLAGS, LDFLAGS, pkg-config for linking C libraries
+• C types in Go: C.int, C.char, C.double, C.struct_Name, C.enum_Name
+• Type conversions: C.CString, C.GoString, C.CBytes, C.GoBytes
+• Memory management: C.malloc, C.free, always free with defer
+• Exporting Go to C: //export directive for making Go functions callable from C
+• Build requirements: CGO_ENABLED=1, CC environment variable
+• Performance considerations: CGO calls have overhead, minimize frequency
+• Cross-compilation: challenges with CGO, need C toolchain for target
+• Best practices: minimize CGO usage, always free C memory, document C dependencies
+• Alternatives: prefer pure Go implementations when possible for portability
+*/

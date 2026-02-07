@@ -2362,3 +2362,28 @@ CHECKLIST DE PRODUCCIÓN:
 11. Manejar redirects explícitamente
 12. User-Agent descriptivo
 */
+
+/* SUMMARY - HTTP CLIENT MASTERY IN GO:
+
+TOPIC: Advanced HTTP client patterns for production systems
+- http.DefaultClient has NO timeout - never use in production
+- Custom http.Client with Timeout and Transport configuration mandatory
+- Transport settings: MaxIdleConnsPerHost (default 2 is too low), DialContext timeout, TLSHandshakeTimeout
+- Connection pooling: must close and drain resp.Body to reuse connections
+- HTTP/2 automatic with TLS, multiplexing and binary framing
+- Context for per-request timeouts and cancellation with NewRequestWithContext
+- Retry pattern with exponential backoff and jitter for 5xx errors
+- Circuit breaker states: CLOSED -> OPEN -> HALF-OPEN preventing cascade failures
+- RoundTripper middleware for logging, auth, headers, rate limiting
+- JSON patterns: json.Marshal for request, json.NewDecoder for response streaming
+- Multipart form-data for file uploads with streaming support
+- File downloads with progress tracking and resume capability using Range header
+- Rate limiting with golang.org/x/time/rate token bucket
+- Proxy configuration: http.ProxyFromEnvironment, http.ProxyURL, SOCKS5 support
+- TLS: custom CA certificates, mutual TLS (mTLS), minimum version TLS 1.2
+- Testing with httptest.NewServer for mock servers
+- Popular libraries: resty (fluent API), req (debug features), gentleman (plugins)
+- Body must be replayable for retries using GetBody function
+- Always limit response body size with io.LimitReader to prevent attacks
+- Respect Retry-After header from server responses
+*/

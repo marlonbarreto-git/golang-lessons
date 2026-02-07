@@ -348,3 +348,41 @@ ANTI-PATRONES:
 - No recuperar panics en goroutines de servidor
 - Ignorar panic sin logging
 */
+
+/*
+SUMMARY - PANIC AND RECOVER:
+
+PANIC:
+- Detiene ejecución normal de la función
+- Ejecuta defers en orden inverso (LIFO)
+- Propaga hacia arriba en el call stack
+- Termina el programa si no se recupera
+- panic(value) acepta cualquier tipo
+
+RECOVER:
+- Solo funciona dentro de defer
+- Retorna el valor pasado a panic (nil si no hubo)
+- Permite que el programa continúe normalmente
+- NO captura runtime.Goexit, os.Exit, ni errores fatales
+
+CUÁNDO USAR PANIC:
+- Errores de programación (bugs, invariantes violadas)
+- Inicialización que no puede fallar (Must* pattern)
+- Índice fuera de rango, nil dereference (runtime lo hace)
+- NO para errores esperados (usar error return)
+
+PATRONES:
+- Must*: MustParseTemplate() panic si falla, para init
+- Convertir panic a error: ejecutarSeguro(fn) (result, error)
+- Servidor resiliente: recover por request/goroutine
+- Transaction rollback: defer con recover para ROLLBACK
+
+GOROUTINES:
+- Cada goroutine debe manejar sus propios panics
+- Panic en goroutine NO es capturado por main
+- defer + recover al inicio de cada goroutine de servidor
+
+PROPAGACIÓN:
+- Recover, procesar, y re-panic cuando sea necesario
+- debug.PrintStack() para stack trace en logs
+*/

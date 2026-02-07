@@ -2316,3 +2316,51 @@ TESTING (httptest):
 - Table-driven tests para multiples escenarios
 - Mock external services con httptest.NewServer
 */
+
+/* SUMMARY - API DESIGN, VERSIONING & OPENAPI:
+
+TOPIC: Diseño profesional de REST APIs con versionado y documentación
+
+REST API DESIGN:
+- Sustantivos en plural (/users), HTTP methods semánticos
+- Status codes: 201 Created, 404 Not Found, 422 Unprocessable
+- HATEOAS: links que guían al cliente sobre acciones disponibles
+- kebab-case URLs, camelCase JSON
+
+API VERSIONING:
+- URL Path (/v1/users): más popular, claro para APIs públicas
+- Header (Accept: vnd.api+json;version=2): más limpio
+- Recomendación: URL path para públicas, header para internas
+
+OPENAPI/SWAGGER:
+- Schema-First: Spec YAML → oapi-codegen → Server + types
+- Code-First: Annotations → swaggo/swag → Spec + Swagger UI
+- Validar sincronización spec-código en CI
+
+PAGINATION & FILTERING:
+- Offset (simple), Cursor (consistente), Keyset (time-series)
+- Query params: ?status=active&role=admin&sort=created_at
+- Sparse fieldsets: ?fields=id,name,email
+
+PARTIAL UPDATES:
+- JSON Merge Patch (RFC 7396): null elimina campo
+- JSON Patch (RFC 6902): operaciones precisas
+
+ERROR FORMAT (RFC 7807):
+- application/problem+json: type, title, status, detail, instance
+
+ETAGS & CACHE:
+- If-None-Match → 304 Not Modified (cache validation)
+- If-Match → 412 Precondition Failed (optimistic locking)
+
+BACKWARD COMPATIBILITY:
+- Cambios aditivos seguros, nunca remover/renombrar campos
+- Deprecation → Sunset (mínimo 6 meses) → 410 Gone
+
+HEALTH CHECKS:
+- /livez: proceso vivo, /readyz: puede recibir tráfico
+- /healthz: estado detallado (Kubernetes probes)
+
+TESTING:
+- httptest.NewRecorder (unit), httptest.NewServer (integration)
+*/

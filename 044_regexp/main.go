@@ -834,3 +834,20 @@ PERFORMANCE:
 - MatchString es mas rapido que FindString si solo necesitas bool
 - Match([]byte) es mas rapido que MatchString(string)
 */
+
+/* SUMMARY - CHAPTER 044: Regular Expressions
+Topics covered in this chapter:
+
+• Regexp compilation: Compile vs MustCompile, precompiling patterns at package level
+• RE2 engine: linear time guarantee, no exponential backtracking, safe for user input
+• Pattern syntax: character classes, quantifiers (greedy and lazy), anchors, word boundaries
+• Matching operations: MatchString, FindString, FindAllString, FindStringSubmatch
+• Capture groups: positional and named groups using (?P<name>pattern)
+• SubexpNames: extracting group names and building maps from matches
+• Replace operations: ReplaceAllString with $1/${name} expansion, ReplaceAllStringFunc
+• Split functionality: regexp-based splitting with limit control
+• Common patterns: email, URL, IPv4, phone, UUID, hex color, slug validation
+• regexp vs strings: when to use each, performance characteristics (strings is 5-100x faster)
+• Performance optimization: precompilation, anchoring, non-capturing groups, byte operations
+• Best practices: package-level vars, avoid recompilation, prefer strings for literals
+*/

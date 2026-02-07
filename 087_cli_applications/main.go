@@ -523,3 +523,27 @@ BUENAS PRÁCTICAS:
 - Graceful shutdown
 - Autocompletado
 */
+
+/* SUMMARY - CLI APPLICATIONS IN GO:
+
+TOPIC: Building command-line interfaces and terminal applications
+- flag package in stdlib for basic argument parsing
+- flag.String, flag.Int, flag.Bool, flag.Duration for typed arguments
+- flag.Parse() processes os.Args, flag.Args() returns positional arguments
+- Cobra is de facto standard for complex CLI with subcommands
+- Cobra structure: cmd/root.go with rootCmd and subcommands in separate files
+- PersistentFlags available to all subcommands, local Flags per command
+- Viper integration for configuration from flags, env vars, config files
+- urfave/cli/v2 as simpler alternative to Cobra with similar features
+- Bubbletea for Terminal UI with Model interface (Init, Update, View)
+- Input from os.Stdin with bufio.Reader for line-by-line reading
+- fatih/color for colored terminal output
+- progressbar and spinner packages for long operations feedback
+- Exit codes: 0 success, 1 general error, 2 bad arguments
+- Signal handling with signal.Notify or signal.NotifyContext for graceful shutdown
+- Configuration priority: flags > env vars > config file > defaults
+- Best practices: stderr for errors, stdout for output
+- Help text with -h/--help flag always available
+- Version command for software version display
+- Quiet and verbose modes for script-friendly and debug output
+*/

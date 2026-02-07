@@ -1062,3 +1062,20 @@ go test -v ./...                   # Verbose
 go test -run TestName ./...        # Test específico
 go test -update                    # Actualizar goldens
 */
+
+/* SUMMARY - CHAPTER 059: Advanced Testing
+Topics covered in this chapter:
+
+• testify framework: assert and require packages for expressive assertions
+• Test suites: suite.Suite interface for setup/teardown and shared state
+• Mocking with testify: mock.Mock for interface mocking, On(), Return(), AssertExpectations()
+• gomock framework: generating mocks with mockgen, EXPECT() syntax, AnyTimes(), Times()
+• Integration testing: testing.Short() flag, build tags for separating test types
+• Test fixtures: builder pattern for test data, testdata directory conventions
+• Golden files: storing expected output, -update flag for regenerating
+• Test containers: testcontainers-go for real databases and dependencies
+• Coverage: -cover flag, -coverprofile, >80% target, covermode options
+• Test organization: unit tests alongside code, integration tests in tests/ directory
+• Best practices: table-driven tests, subtests with t.Run(), t.Parallel() for concurrency
+• Commands: go test flags for filtering, coverage, race detection, verbose output
+*/

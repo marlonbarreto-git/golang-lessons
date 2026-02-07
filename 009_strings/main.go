@@ -321,3 +321,37 @@ BUENAS PRÁCTICAS:
 5. Prefiere string literals sobre concatenación
 6. Raw strings (``) para regex, paths, y texto multilínea
 */
+
+/*
+SUMMARY - STRINGS:
+
+FUNDAMENTOS:
+- Strings son secuencias de bytes inmutables (UTF-8 encoded)
+- len() retorna bytes, no caracteres
+- utf8.RuneCountInString() para contar caracteres reales
+
+BYTES VS RUNES:
+- byte = uint8 (un byte), rune = int32 (Unicode code point)
+- range sobre string itera runes (no bytes)
+- Caracteres multibyte (ej: chino) ocupan múltiples bytes
+
+STRING LITERALS:
+- Comillas dobles: interpretan escapes (\n, \t, etc.)
+- Backticks (raw): preservan todo literalmente, multilínea
+
+INMUTABILIDAD:
+- No se puede modificar un string directamente
+- Convertir a []byte o []rune, modificar, convertir de vuelta
+
+PAQUETE strings:
+- Búsqueda: Contains, HasPrefix, HasSuffix, Index, Count
+- Transformación: ToUpper, ToLower, TrimSpace, Replace
+- Split/Join: Split, SplitN, Fields, Join
+- strings.Builder para concatenación eficiente en loops
+- strings.EqualFold para comparación case-insensitive
+
+UNICODE:
+- unicode.IsLetter, IsDigit, IsSpace para propiedades
+- utf8.ValidString para validar UTF-8
+- Soporte nativo completo de Unicode en Go
+*/

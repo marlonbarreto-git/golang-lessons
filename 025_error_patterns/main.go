@@ -340,3 +340,43 @@ MUST PATTERN:
 RETRY PATTERN:
 - Reintentar operaciones que pueden fallar
 */
+
+/*
+SUMMARY - ERROR HANDLING PATTERNS:
+
+EARLY RETURN:
+- Manejar errores primero con return inmediato
+- Happy path sin indentación
+- Cada paso del pipeline verifica y wrappea
+
+SENTINEL ERRORS:
+- var ErrNotFound = errors.New("not found")
+- Switch con errors.Is() para manejar distintos sentinels
+- Stdlib: os.ErrNotExist, sql.ErrNoRows
+
+ERROR WRAPPING:
+- fmt.Errorf("context: %w", err) preserva el original
+- errors.Is() busca a través de toda la cadena wrap
+- errors.As() extrae tipo específico de la cadena
+
+CUSTOM ERROR TYPES:
+- ValidationError con Field y Message
+- ContextError con Op, Err y Context map
+- Implementar Unwrap() para participar en la cadena
+
+MULTI-ERROR (Go 1.20+):
+- errors.Join(errs...) combina múltiples errores
+- errors.Is() funciona con cualquiera de los combinados
+
+DEFER CON ERROR:
+- Named return (err error) permite modificar en defer
+- Capturar errores de Close() sin perder el error original
+
+RETRY PATTERN:
+- Reintentar N veces con delay configurable
+- Retornar último error si todos los intentos fallan
+
+MUST PATTERN:
+- log.Fatal(err) para errores irrecuperables en init
+- Solo para inicialización del programa
+*/

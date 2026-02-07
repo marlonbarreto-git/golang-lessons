@@ -805,3 +805,20 @@ ERRORES COMUNES:
 - Funcs() despues de Parse() (panic)
 - template.HTML(userInput) sin sanitizar
 */
+
+/* SUMMARY - CHAPTER 046: Templates
+Topics covered in this chapter:
+
+• text/template: template parsing, execution with data, control flow
+• Template syntax: {{.Field}} for data, {{if}}/{{else}}/{{end}}, {{range}}, {{with}}
+• Pipelines: {{.Field | func1 | func2}} Unix-style chaining
+• Built-in functions: eq, ne, lt, gt, len, index, printf, and, or, not
+• Custom functions: template.FuncMap for adding helper functions
+• Template composition: {{define}}, {{template}}, {{block}} for reusable templates
+• ParseGlob/ParseFiles: loading multiple template files
+• html/template: automatic context-aware escaping to prevent XSS
+• Context-aware escaping: HTML, JavaScript, CSS, URL contexts
+• Template types: template.HTML/CSS/JS/URL for trusted content
+• Best practices: template caching, embed.FS for embedded templates, buffer rendering
+• Common errors: using text/template for HTML, parsing on every request, Funcs() after Parse()
+*/

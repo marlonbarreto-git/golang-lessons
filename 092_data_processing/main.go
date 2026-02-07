@@ -427,3 +427,22 @@ BIBLIOTECAS:
 - arrow: columnar format
 - gota: DataFrames (like pandas)
 */
+
+/*
+SUMMARY - CHAPTER 092: Data Processing
+
+TOPIC: Data Processing and ETL in Go
+- CSV processing: encoding/csv Reader/Writer, ReadAll for small files, streaming with Read() for large files
+- JSON Lines (JSONL): One JSON object per line, use json.Encoder/Decoder for streaming, efficient for logs
+- Gonum statistics: Mean(), StdDev(), Variance(), Quantile() for percentiles, Correlation(), LinearRegression()
+- Gonum matrices: mat.NewDense() for matrix creation, operations (Add/Mul/Scale), Inverse/Det/SVD/Eigenvalues
+- Apache Arrow: Columnar memory format, array builders (Int64Builder, StringBuilder), schema and record batches
+- Parquet: Compressed columnar format, pqarrow.NewFileReader/Writer for efficient storage and queries
+- Pipeline pattern: Source (generates data) -> Transform (processes) -> Sink (consumes), use channels for flow
+- ETL architecture: Extractor interface (read data), Transformer interface (process), Loader interface (write)
+- Composable transformers: FilterTransformer, MapTransformer, chain multiple transformers in pipeline
+- Streaming aggregations: RunningStats for mean/variance without storing all data, Welford's algorithm for numerics
+- Approximate algorithms: HyperLogLog (count distinct), Bloom Filter (membership), CountMinSketch (frequency)
+- Pipeline coordination: Context for cancellation, buffered channels for backpressure, goroutines for parallelism
+- Best practices: Use channels for streaming, handle context cancellation, implement proper cleanup with defer
+*/

@@ -495,3 +495,23 @@ GRACEFUL SHUTDOWN:
 - Stateless processes
 - Logs como streams
 */
+
+/*
+SUMMARY - CHAPTER 104: Deployment
+
+TOPIC: Production Deployment Strategies
+- Build optimization: -ldflags="-s -w" strips debug info, CGO_ENABLED=0 for static binaries, cross-compilation
+- Version injection: -ldflags="-X main.version=1.0.0" embeds version/commit into binary at build time
+- Cross-compilation: GOOS/GOARCH for targeting Linux/Darwin/Windows on amd64/arm64 architectures
+- Multi-stage Docker: Build stage with golang image, runtime stage with alpine/distroless/scratch for minimal size
+- Docker security: Non-root user (adduser), minimal base image (distroless/scratch), copy only binary and certs
+- Kubernetes Deployment: Replicas, resource limits (memory/CPU), liveness/readiness probes for health checks
+- Kubernetes resources: ConfigMap for config, Secret for credentials, Service for networking, HPA for autoscaling
+- Resource requests/limits: requests for scheduling, limits for OOM prevention, GOMAXPROCS from CPU limit
+- Systemd service: Unit file with restart policies, environment variables, resource limits, security hardening
+- Systemd security: NoNewPrivileges, ProtectSystem, ProtectHome, MemoryMax, CPUQuota for containment
+- GoReleaser: Automates multi-platform builds, Docker images, Homebrew formula, deb/rpm packages from YAML config
+- CI/CD: GitHub Actions for tests, linting, automated releases on tag push, GoReleaser integration
+- Graceful shutdown: signal.Notify for SIGINT/SIGTERM, srv.Shutdown(ctx) with timeout, cleanup DB/cache connections
+- 12-Factor App: Config in env vars, stateless processes, logs as streams, dev/prod parity, fast startup/shutdown
+*/

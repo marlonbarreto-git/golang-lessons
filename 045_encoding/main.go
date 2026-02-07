@@ -963,3 +963,20 @@ REGLA GENERAL:
 - Base64 para embed binario en texto
 - Hex para debugging y hashes
 */
+
+/* SUMMARY - CHAPTER 045: Encoding
+Topics covered in this chapter:
+
+• encoding/json: Marshal/Unmarshal, struct tags (omitempty, string), custom marshaling
+• JSON streaming: Decoder/Encoder for efficient processing of large data
+• encoding/xml: Marshal/Unmarshal, attributes, namespaces, token-based streaming
+• encoding/gob: native Go binary format, faster than JSON, requires type registration
+• encoding/csv: Reader/Writer for tabular data, configurable delimiters, lazy reading
+• encoding/binary: BigEndian/LittleEndian byte order, Read/Write for binary serialization
+• encoding/base64: StdEncoding, URLEncoding, RawStdEncoding for binary-to-text encoding
+• encoding/hex: EncodeToString/DecodeString, Dump for debugging, hash representation
+• Encoding interfaces: TextMarshaler/Unmarshaler, BinaryMarshaler/Unmarshaler
+• Custom marshaling: implementing MarshalJSON/UnmarshalJSON for complex types
+• Use cases: JSON for APIs, XML for legacy, CSV for tabular, Gob for Go-to-Go, Binary for protocols
+• Best practices: struct tags, error handling, streaming for large data, choosing right format
+*/

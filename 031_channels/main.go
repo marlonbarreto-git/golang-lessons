@@ -439,3 +439,48 @@ BUENAS PRÁCTICAS:
 5. Verifica ok para saber si channel está cerrado
 6. Evita cerrar channels si no es necesario (GC lo maneja)
 */
+
+/*
+SUMMARY - CHAPTER 031: CHANNELS
+
+CHANNEL TYPES:
+- Unbuffered: synchronous, blocks until receiver ready
+- Buffered: asynchronous, blocks when buffer full
+
+OPERATIONS:
+- ch <- value: send to channel
+- value := <-ch: receive from channel
+- value, ok := <-ch: receive with closed check
+- close(ch): close channel (only sender should close)
+- for v := range ch: iterate until closed
+
+DIRECTIONALITY:
+- chan T: bidirectional
+- chan<- T: send-only
+- <-chan T: receive-only
+- Use in function signatures for safety
+
+COMMON PATTERNS:
+- Done channel: signal completion with struct{}
+- Generator: produce values in goroutine
+- Pipeline: chain processing stages
+- Fan-out: distribute work to multiple workers
+- Fan-in: merge multiple channels into one
+- Semaphore: limit concurrency with buffered channel
+
+NIL CHANNELS:
+- Send/receive on nil channel blocks forever
+- Useful in select to disable a case dynamically
+
+ERRORS TO AVOID:
+- Send on closed channel: panic
+- Close closed channel: panic
+- Close nil channel: panic
+- Goroutine leak: goroutine waiting on channel forever
+
+BEST PRACTICES:
+- Producer closes, consumer never closes
+- Use directional channels in function parameters
+- Buffered channels decouple producer/consumer
+- struct{} for signaling (zero bytes)
+*/

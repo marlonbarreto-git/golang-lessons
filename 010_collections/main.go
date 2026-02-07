@@ -411,3 +411,39 @@ BUENAS PRÁCTICAS:
 5. Nunca escribas en nil maps (causa panic)
 6. Usa struct{} como valor en sets (0 bytes)
 */
+
+/*
+SUMMARY - COLLECTIONS:
+
+ARRAYS:
+- Tamaño fijo, parte del tipo: [5]int != [3]int
+- Se copian por valor al asignar o pasar a funciones
+- Uso raro, preferir slices
+
+SLICES:
+- Vista dinámica sobre un array subyacente
+- Creación: literal []int{1,2,3}, make([]int, len, cap)
+- nil slice vs slice vacío (ambos len=0)
+- Slicing: s[inicio:fin], s[inicio:fin:capacidad]
+- append: puede realocar, siempre reasignar resultado
+- copy: copia elementos entre slices
+- Slices comparten memoria con sub-slices
+
+PAQUETE slices (Go 1.21+):
+- Sort, Contains, Index, Min, Max, Reverse
+- Clone para copias independientes, Equal para comparación
+
+MAPS:
+- Key-value dinámico con búsqueda O(1)
+- Creación: make(map[K]V) o literal
+- Comma-ok idiom: if v, ok := m[key]; ok { }
+- delete(m, key) para eliminar
+- Orden de iteración NO garantizado
+- Nunca escribir en nil map (panic)
+
+PATRONES:
+- Maps como sets con map[T]struct{} (0 bytes por valor)
+- Contar ocurrencias con map[string]int
+- Agrupar por clave con map[string][]T
+- Ordenar maps: extraer claves, sort, iterar
+*/

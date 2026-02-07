@@ -705,3 +705,22 @@ RECURSOS:
 - x86-64 Reference: https://www.felixcloutier.com/x86/
 - Intel Intrinsics Guide: https://www.intel.com/content/www/us/en/docs/intrinsics-guide
 */
+
+/* SUMMARY - CHAPTER 072: Go Assembly
+Topics covered in this chapter:
+
+• Plan 9 assembly: Go's assembly syntax and conventions
+• Registers: AX, BX, CX, DX for general purpose, BP for base pointer, SP for stack pointer
+• Pseudo-registers: FP (frame pointer), SB (static base) for addressing
+• Instruction syntax: opcode SRC, DST (reversed from Intel/AT&T syntax)
+• Function calling: TEXT directive, NOSPLIT flag, argument and return access via FP
+• Stack frame: accessing arguments and returns with offsets relative to FP
+• Arithmetic instructions: ADD, SUB, IMUL, IDIV, INC, DEC for integer operations
+• Logic and bit operations: AND, OR, XOR, SHL, SHR, BSF, BSR, POPCNT
+• Atomic operations: LOCK prefix, XADD, CMPXCHG for concurrent programming
+• SIMD instructions: SSE (128-bit), AVX (256-bit), AVX-512 (512-bit) for parallel operations
+• Crypto instructions: AESENC, AESDEC, SHA256RNDS2, PCLMULQDQ for hardware acceleration
+• Tools: -gcflags="-S" for viewing generated assembly, objdump for disassembly
+• When to use: SIMD, crypto, atomics, performance-critical code (rarely needed)
+• Best practices: benchmark first, compiler is very good, use only when necessary
+*/

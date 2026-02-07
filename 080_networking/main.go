@@ -2449,3 +2449,49 @@ var _ = elliptic.P256
 var _ = pem.Encode
 var _ = pkix.Name{}
 var _ = x509.CreateCertificate
+
+/*
+SUMMARY - CHAPTER 080: LOW-LEVEL NETWORK PROGRAMMING
+
+NET PACKAGE CORE:
+- net.Listen/net.Dial for TCP servers and clients
+- net.ListenPacket for UDP servers (ReadFrom/WriteTo)
+- net.Conn interface: Read, Write, Close, deadlines (io.Reader+Writer)
+- net.Listener interface: Accept, Close, Addr
+- Supports tcp, udp, unix, ip with IPv4/IPv6 variants
+
+TCP PATTERNS:
+- Server: Listen + Accept loop + goroutine per connection
+- Client: Dial, DialTimeout, Dialer.DialContext with context
+- Concurrent server with semaphore channel for connection limits
+- Graceful shutdown: close listener, wait active conns, force timeout
+- bufio.Scanner/Reader for line-oriented text protocols
+
+UDP AND UNIX SOCKETS:
+- UDP: connectionless, best-effort, max 65535 byte payload
+- Unix domain sockets: faster than TCP localhost, filesystem permissions
+- Stream ("unix") and datagram ("unixgram") modes
+
+DEADLINES AND TIMEOUTS:
+- SetDeadline/SetReadDeadline/SetWriteDeadline are absolute (time.Time)
+- Timeout does not close connection, only fails the current operation
+- Idle timeout pattern: reset deadline before each Read
+
+DNS AND IP HANDLING:
+- LookupHost, LookupAddr, LookupIP, LookupMX, LookupNS, LookupTXT
+- Custom Resolver with PreferGo and custom Dial function
+- net.IP + net.IPNet for CIDR, netip.Addr/AddrPort/Prefix (Go 1.18+)
+
+TLS AND mTLS:
+- tls.Listen/tls.Dial for encrypted connections
+- tls.Config: MinVersion, CipherSuites, ALPN, certificates
+- mTLS: RequireAndVerifyClientCert + ClientCAs pool
+- Certificate generation with crypto/x509 and crypto/ecdsa
+
+PRODUCTION PATTERNS:
+- Connection pooling with channel-based pool and health checks
+- Custom protocol implementation (Redis-like RESP)
+- TCP keep-alive configuration (Go 1.24+ KeepAliveConfig)
+- SO_REUSEPORT for zero-downtime deploys
+- Graceful connection draining with health check integration
+*/

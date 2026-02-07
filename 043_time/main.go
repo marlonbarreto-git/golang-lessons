@@ -1039,3 +1039,22 @@ PERFORMANCE:
 - time.Now() es barato (~25ns, usa vDSO)
 - Siempre Stop() timers y tickers
 */
+
+/* SUMMARY - CHAPTER 043: Time Package
+Topics covered in this chapter:
+
+• Time fundamentals: Duration, time.Time struct, formatting and parsing
+• Time formatting: RFC3339, custom layouts using reference time (Mon Jan 2 15:04:05 MST 2006)
+• Duration operations: hours to nanoseconds, string parsing, arithmetic
+• Timezone handling: IANA timezones, LoadLocation, In() method, time/tzdata embedding
+• Monotonic clock: wall time vs monotonic time for measuring intervals
+• Unix timestamps: converting between Unix seconds, milliseconds, microseconds, nanoseconds
+• Time arithmetic: Add, Sub, AddDate, Since, Until
+• DST gotchas: 24 hours is not always 1 day during transitions
+• Timers and tickers: NewTimer, NewTicker, AfterFunc, avoiding memory leaks with Stop()
+• JSON marshaling: default RFC3339 format, custom marshaling for different formats
+• Database best practices: always store UTC, use TIMESTAMP WITH TIME ZONE
+• Testing patterns: Clock interface abstraction, MockClock for deterministic tests
+• Performance considerations: precompute locations, vDSO optimization, proper cleanup
+• Common pitfalls: time.After in loops, DST transitions, zero values in JSON
+*/

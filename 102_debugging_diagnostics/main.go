@@ -545,3 +545,45 @@ func min(a, b int) int {
 	}
 	return b
 }
+
+/*
+SUMMARY - DEBUGGING AND DIAGNOSTICS:
+
+DELVE DEBUGGER:
+- Install with go install github.com/go-delve/delve/cmd/dlv@latest
+- Modes: debug, attach, test, core dump analysis
+- Commands: break, continue, next, step, print, locals, goroutines
+- Remote debugging and VS Code integration
+
+RUNTIME/DEBUG PACKAGE:
+- debug.ReadBuildInfo() for build metadata
+- debug.SetGCPercent() and debug.SetMemoryLimit() for GC tuning
+- debug.FreeOSMemory() to return memory to OS
+- runtime.Stack() for programmatic stack traces
+
+RACE DETECTOR:
+- Activate with -race flag (go run, go test, go build)
+- Uses ThreadSanitizer algorithm, 5-10x slowdown
+- Detects concurrent map access, slice append, interface check races
+- Go 1.22+ fixes loop variable capture issue
+
+GOROUTINE LEAK DETECTION:
+- Monitor runtime.NumGoroutine() for growth
+- Use go.uber.org/goleak in tests
+- Common causes: unbuffered channels, forgotten context cancel, unclosed HTTP bodies
+
+MEMORY LEAK DETECTION:
+- runtime.ReadMemStats for heap monitoring
+- pprof heap profiles with diff_base for comparison
+- GODEBUG=gctrace=1 for GC tracing
+
+GODEBUG VARIABLES:
+- gctrace, schedtrace for runtime diagnostics
+- http2debug for HTTP/2 debugging
+
+PRODUCTION DEBUGGING:
+- Never use Delve directly in production
+- Use pprof endpoints on internal-only ports
+- GOTRACEBACK=crash for core dumps
+- Continuous profiling with Pyroscope or Datadog
+*/

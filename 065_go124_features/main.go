@@ -336,3 +336,20 @@ BREAKING CHANGES:
 - Linux kernel 3.2+ requerido
 - Última versión para macOS 11
 */
+
+/* SUMMARY - CHAPTER 065: Go 1.24 Features
+Topics covered in this chapter:
+
+• Generic type aliases: complete support without restrictions or edge cases
+• Swiss Tables: new hash map implementation ~60% faster with better memory locality
+• Tool directives: go.mod tool directives for specifying required tools
+• Crypto improvements: crypto/mlkem (post-quantum), crypto/hkdf, crypto/pbkdf2
+• Package weak: weak pointers for preventing memory leaks in caches
+• testing/synctest: testing concurrent code with deterministic behavior
+• os.Root: confined filesystem access for security
+• JSON omitzero: new struct tag for omitting zero values
+• Testing improvements: b.Loop() for benchmarks, t.Context()/b.Context(), t.Chdir()
+• Performance: better small object allocation, new internal mutex
+• Tool improvements: go run/tool caching, new vet analyzer for tests
+• Breaking changes: Linux kernel 3.2+ required, last version for macOS 11
+*/

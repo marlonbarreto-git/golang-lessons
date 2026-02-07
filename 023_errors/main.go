@@ -405,3 +405,45 @@ BUENAS PRÁCTICAS:
 6. No ignorar errores con _
 7. Early return al encontrar errores
 */
+
+/*
+SUMMARY - ERRORS:
+
+ERROR INTERFACE:
+- type error interface { Error() string }
+- Cualquier tipo que implemente Error() es un error
+
+CREAR ERRORES:
+- errors.New("mensaje") para errores simples
+- fmt.Errorf("formato %v", val) con formato
+- Tipos personalizados: type MiError struct { Codigo int }
+
+SENTINEL ERRORS:
+- var ErrNotFound = errors.New("not found")
+- Errores predefinidos para comparación
+- Stdlib: fs.ErrNotExist, fs.ErrPermission, sql.ErrNoRows
+
+ERROR WRAPPING (Go 1.13+):
+- fmt.Errorf("contexto: %w", err) agrega contexto
+- Implementar Unwrap() error en custom errors
+- errors.Join(err1, err2) combina múltiples (Go 1.20+)
+
+VERIFICAR ERRORES:
+- errors.Is(err, target) verifica a través de la cadena wrap
+- errors.As(err, &target) extrae tipo específico
+- Preferir Is/As sobre comparación directa
+
+PATRÓN BÁSICO:
+- if err != nil { return fmt.Errorf("ctx: %w", err) }
+- Early return al encontrar errores
+- Error como último valor de retorno
+
+VALIDACIÓN:
+- Retornar []error para múltiples errores de validación
+- errors.Join para combinar en un solo error
+
+ANTI-PATRONES:
+- Ignorar errores con _
+- Comparar err.Error() como string (frágil)
+- Panic para errores esperados
+*/

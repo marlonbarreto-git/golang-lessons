@@ -360,3 +360,20 @@ PLATFORM:
 - macOS 12+ requerido
 - Última versión para windows/arm 32-bit
 */
+
+/* SUMMARY - CHAPTER 066: Go 1.25 Features
+Topics covered in this chapter:
+
+• sync.WaitGroup.Go(): more convenient method for launching goroutines with WaitGroup
+• encoding/json/v2: experimental JSON package with better performance and features
+• testing/synctest: stabilized package for testing concurrent code deterministically
+• Container-aware GOMAXPROCS: automatic detection and adjustment in containerized environments
+• Green Tea GC: experimental garbage collector improvements
+• Trace Flight Recorder: continuous tracing for production debugging
+• Performance improvements: RSA keygen 3x faster, SHA-1 2x faster, SHA-3 2x faster
+• DWARF5: reduces binary sizes with improved debug info format
+• net/http.CrossOriginProtection: built-in CORS protection
+• reflect.TypeAssert: zero-allocation type assertions
+• slog improvements: GroupAttrs, Record.Source()
+• Platform changes: macOS 12+ required, last version for windows/arm 32-bit
+*/

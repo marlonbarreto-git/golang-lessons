@@ -1023,3 +1023,38 @@ var _ = binary.BigEndian
 var _ = bytes.NewBuffer
 var _ = rand.Intn
 var _ = os.Stdout
+
+/*
+SUMMARY - COCKROACHDB: DISTRIBUTED SQL DATABASE IN GO:
+
+WHAT IS COCKROACHDB:
+- Distributed SQL database written entirely in Go
+- PostgreSQL-compatible, ACID transactions across nodes
+- Automatic sharding, rebalancing, and failure recovery
+- Used by DoorDash, Netflix, Bose, fintech companies
+
+ARCHITECTURE:
+- Layered: SQL -> Transaction (KV) -> Distribution -> Replication -> Storage (Pebble)
+- Data split into ~512MB Ranges, each replicated via Raft (3 replicas)
+- Leaseholder serves reads, MVCC with hybrid-logical clocks
+
+KEY GO PATTERNS DEMONSTRATED:
+- Hybrid-Logical Clocks (HLC): combines physical time with logical counters
+- MVCC Storage Engine: timestamped key-value pairs for snapshot isolation
+- Range-Based Sharding: automatic splitting/merging of key ranges
+- Raft Consensus: leader election, log replication, majority commits
+- Distributed Transactions: two-phase commit with write intents
+
+PERFORMANCE TECHNIQUES:
+- Pebble storage engine (pure Go LSM-tree, replaced RocksDB)
+- Vectorized SQL execution on column batches
+- Per-query memory budgets with disk spilling
+- Goroutine-per-connection with pgwire protocol
+- Batch KV operations to reduce Raft round-trips
+
+GO PHILOSOPHY:
+- Single binary deployment, no external dependencies
+- Composition through interfaces at each layer
+- Explicit error handling with context wrapping
+- Goroutines for concurrent range processing
+*/

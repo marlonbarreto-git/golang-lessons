@@ -576,6 +576,62 @@ func demonstrateSignals() {
 	fmt.Println("Signal handler removido")
 }
 
+/*
+SUMMARY - Chapter 047: OS, Exec, and Processes
+
+EXEC.COMMAND:
+- exec.Command(name, args...) creates a command
+- cmd.Output() runs and captures stdout
+- cmd.CombinedOutput() captures stdout+stderr
+- cmd.Run() runs and waits
+- cmd.Start()/cmd.Wait() for async execution
+- exec.LookPath checks if command exists in PATH
+
+EXEC WITH CONTEXT:
+- exec.CommandContext(ctx, name, args...) for timeout/cancellation
+- cmd.WaitDelay for graceful shutdown (Go 1.20+)
+- cmd.Cancel for custom cancellation signal
+
+STDIN/STDOUT/STDERR:
+- cmd.Stdin = strings.NewReader("input")
+- cmd.Stdout = &bytes.Buffer{}
+- cmd.StdinPipe()/StdoutPipe()/StderrPipe() for streaming
+
+PIPES:
+- Connect commands: cmd1.StdoutPipe() -> cmd2.Stdin
+- Shell pipes: exec.Command("sh", "-c", "cmd1 | cmd2")
+- SECURITY: never concatenate user input in shell strings
+
+ENVIRONMENT VARIABLES:
+- os.Getenv(key), os.LookupEnv(key)
+- os.Setenv(key, val), os.Unsetenv(key)
+- os.Environ() returns all env vars
+- cmd.Env = append(os.Environ(), "KEY=val")
+
+TEMP FILES AND DIRS:
+- os.CreateTemp(dir, pattern) with cleanup via defer os.Remove
+- os.MkdirTemp(dir, pattern) with cleanup via defer os.RemoveAll
+
+FILEPATH:
+- filepath.Join, Dir, Base, Ext, Clean, Abs, Rel
+- filepath.WalkDir for recursive traversal
+- filepath.Glob for pattern matching
+
+PROCESS INFO:
+- os.Getpid(), os.Getppid(), os.Hostname()
+- runtime.GOOS, runtime.GOARCH, runtime.NumCPU()
+
+SIGNALS:
+- signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+- signal.NotifyContext for context-based signal handling
+- Graceful shutdown pattern with context.WithTimeout
+
+SECURITY:
+- Never concatenate user input in shell commands
+- Use separate arguments: exec.Command("cmd", userInput)
+- Use filepath.Clean for paths
+*/
+
 // Asegurar que imports no marcados como unused se usan
 var (
 	_ = io.Copy

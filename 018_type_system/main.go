@@ -441,3 +441,40 @@ BUENAS PRÁCTICAS:
 5. Implementa Stringer para mejor debugging
 6. Los tipos función son útiles para callbacks y middleware
 */
+
+/*
+SUMMARY - TYPE SYSTEM:
+
+TYPE DEFINITION (type X T):
+- Crea un NUEVO tipo con tipo subyacente T
+- Requiere conversión explícita entre tipos
+- Puede tener métodos propios
+- Útil para type safety y semántica (Celsius, Email, UserID)
+
+TYPE ALIAS (type X = T):
+- Dos nombres para el MISMO tipo
+- NO requiere conversión
+- NO puede tener métodos propios
+- byte = uint8, rune = int32 son aliases del lenguaje
+
+TYPE ASSERTION:
+- valor.(Tipo) para extraer tipo de interface (panic si falla)
+- valor, ok := i.(Tipo) forma segura con comma-ok
+
+TYPE SWITCH:
+- switch v := i.(type) { case int: ... case string: ... }
+- Para manejar múltiples tipos de interface
+
+TIPOS COMPUESTOS PERSONALIZADOS:
+- type IntSlice []int con métodos Sum(), Max()
+- type StringMap map[string]string con método Get()
+- type Handler func(string) string para tipos función
+
+GENERIC TYPE ALIAS (Go 1.24+):
+- type Pair[T any] = struct { First, Second T }
+
+PATRONES:
+- Newtype pattern para prevenir mezcla de IDs (UserID vs OrderID)
+- Tipos con Stringer para mejor debugging
+- Middleware con tipos función compuestos
+*/

@@ -443,3 +443,20 @@ CUÁNDO USAR:
 - Pipelines de transformación
 - APIs más expresivas
 */
+
+/* SUMMARY - CHAPTER 062: Iterators (Go 1.23+)
+Topics covered in this chapter:
+
+• Iterator fundamentals: iter.Seq[V] and iter.Seq2[K,V] function signatures
+• Range over functions: Go 1.23+ feature allowing range loops over custom iterators
+• Standard library integration: slices.Values, slices.All, maps.Keys, maps.Values
+• Creating iterators: implementing iter.Seq functions with yield callback pattern
+• Yield control flow: returning false stops iteration, true continues
+• Pull iterators: iter.Pull for manual iteration control, defer stop()
+• Common patterns: Filter, Map, Take, Skip, Enumerate, Zip, Chain
+• Lazy evaluation: computing values on-demand without allocating intermediate collections
+• Iterator composition: chaining operations into functional pipelines
+• Performance benefits: zero-allocation iteration, efficient memory usage
+• Use cases: collection processing, data generation, transformation pipelines, expressive APIs
+• Best practices: always call stop() when using Pull, handle early termination properly
+*/

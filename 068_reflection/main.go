@@ -351,3 +351,20 @@ REGLAS:
 4. Reflection es lento - evitar en hot paths
 5. Código con reflection es más difícil de mantener
 */
+
+/* SUMMARY - CHAPTER 068: Reflection
+Topics covered in this chapter:
+
+• reflect.TypeOf and reflect.ValueOf: obtaining type and value information at runtime
+• Kind types: Int, String, Bool, Slice, Map, Struct, Ptr, Interface, Func
+• Struct inspection: NumField(), Field(i), accessing field names, types, and tags
+• Struct tags: extracting and parsing tags like json, xml, validate
+• Method inspection: NumMethod(), Method(i), MethodByName for runtime method discovery
+• Modifying values: ValueOf(&x).Elem(), CanSet(), Set methods (SetInt, SetString, etc.)
+• Creating values dynamically: MakeSlice, MakeMap, New, Zero
+• Calling methods: MethodByName and Call for runtime method invocation
+• reflect.DeepEqual: deep comparison of complex structures
+• Use cases: serialization, validation, ORMs, dependency injection
+• Performance considerations: reflection is slow, avoid in hot paths
+• Best practices: prefer type switches and generics, use reflection only when necessary
+*/

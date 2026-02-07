@@ -550,6 +550,56 @@ func parseConfig(args []string) Config {
 	return cfg
 }
 
+/*
+SUMMARY - Chapter 048: Flag Package Deep Dive
+
+FLAG BASICS:
+- flag.String/Int/Bool/Duration/Float64 return pointers
+- flag.StringVar/IntVar/BoolVar bind to existing variables
+- flag.Parse() must be called before accessing values
+- Supports -flag value, -flag=value, --flag value
+
+POSITIONAL ARGUMENTS:
+- flag.Args() returns remaining non-flag args
+- flag.Arg(i) returns i-th remaining arg
+- flag.NArg() returns count of remaining args
+- Double-dash (--) stops flag parsing
+
+CUSTOM FLAG.VALUE:
+- Implement String() string and Set(string) error
+- Use flag.Var(&value, name, usage) to register
+- Enables repeated flags, validated types, enums
+
+FLAG.FLAGSET:
+- Independent flag set for subcommands
+- flag.NewFlagSet(name, errorHandling)
+- Error modes: ContinueOnError, ExitOnError, PanicOnError
+
+USAGE CUSTOMIZATION:
+- flag.Usage = func() { ... } for custom help
+- fs.SetOutput(w) to redirect output
+- fs.PrintDefaults() to print flag defaults
+
+VISIT/VISITALL:
+- Visit(fn) iterates over flags SET by user
+- VisitAll(fn) iterates over ALL defined flags
+- Useful for detecting explicitly-provided flags
+
+ENV VAR FALLBACK:
+- Pattern: flag value > env var > default
+- Check env before defining flag default
+
+SUBCOMMAND PATTERN:
+- Create separate FlagSet per subcommand
+- Switch on os.Args[1] to dispatch
+- Parse remaining args with appropriate FlagSet
+
+GOTCHAS:
+- Bool flags: -flag sets true, -flag=false for false
+- Flags stop at first non-flag argument
+- -flag same as --flag
+*/
+
 func executeTaskCLI(args []string) {
 	if len(args) == 0 {
 		fmt.Println("      usage: taskctl <command> [flags]")

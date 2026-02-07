@@ -689,3 +689,31 @@ func (p *HashPlugin) Process(data []byte) ([]byte, error) {
 	}
 	return []byte(fmt.Sprintf("hash:%016x (len:%d)", hash, len(data))), nil
 }
+
+/*
+SUMMARY - CHAPTER 073: PLUGIN SYSTEM & EXPVAR MONITORING
+
+PLUGIN PACKAGE:
+- plugin.Open loads .so shared objects compiled with -buildmode=plugin
+- p.Lookup finds exported symbols (variables, functions, types)
+- Limitations: Linux/FreeBSD/macOS only, same Go version, no unload
+- Recommended pattern: define shared interface, plugin implements it
+- Alternatives: subprocess + gRPC (Hashicorp go-plugin), Yaegi, WASM
+
+EXPVAR - APPLICATION MONITORING:
+- expvar.Int, expvar.Float, expvar.String: atomic thread-safe variables
+- expvar.Map: hierarchical metrics (by endpoint, method, status code)
+- expvar.Publish + expvar.Func: computed variables (goroutines, memory)
+- Custom Var interface: implement String() returning valid JSON
+- expvar.Do iterates all registered variables
+- HTTP handler at /debug/vars returns all vars as JSON
+
+PRACTICAL EXAMPLES:
+- Plugin registry with TextPlugin interface (Process, Name, Version)
+- Simulated plugins: uppercase, reverse, caesar cipher, JSON formatter,
+  word counter, hash generator
+- LatencyTracker: custom expvar.Var with min/max/avg/p95 stats
+- MetricsMiddleware: tracks requests, errors, methods, status codes,
+  latency using expvar types
+- PluginEngine: simulated plugin loading, execution, and listing
+*/

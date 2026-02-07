@@ -322,3 +322,36 @@ BUENAS PRÁCTICAS:
 6. Las constantes no tipadas son muy flexibles, úsalas
 7. Siempre convierte tipos explícitamente
 */
+
+/*
+SUMMARY - VARIABLES AND CONSTANTS:
+
+TIPOS BÁSICOS:
+- bool, string, int/int8/int16/int32/int64
+- uint/uint8(byte)/uint16/uint32/uint64/uintptr
+- float32/float64, complex64/complex128, rune (int32)
+
+ZERO VALUES:
+- Todas las variables se inicializan automáticamente
+- bool=false, int=0, float=0.0, string="", pointer/slice/map/chan/func=nil
+
+DECLARACIÓN DE VARIABLES:
+- var x int = 10 (explícito), var x = 10 (inferido)
+- x := 10 (declaración corta, solo en funciones)
+- var () para bloques de declaraciones relacionadas
+
+CONSTANTES:
+- const Pi = 3.14159 (no tipada, flexible)
+- const blocks con tipo explícito para enums
+- Las constantes no tipadas se adaptan al contexto
+
+CONVERSIÓN DE TIPOS:
+- Go NO hace conversiones implícitas
+- Siempre explícitas: float64(entero), int(flotante)
+- int a float trunca (no redondea)
+
+TYPE INFERENCE:
+- := infiere el tipo del valor asignado
+- any (interface{}) puede contener cualquier valor
+- Type assertion para extraer el tipo concreto
+*/

@@ -913,3 +913,39 @@ func demoMiniGitea() {
 	closed := gitea.issues.ListIssues("alice", "webapp", "closed")
 	fmt.Printf("  Issues: open=%d, closed=%d\n", len(open), len(closed))
 }
+
+/*
+SUMMARY - GITEA: SELF-HOSTED GIT SERVICE IN GO:
+
+WHAT IS GITEA:
+- Lightweight self-hosted Git service, community fork of Gogs
+- Repo hosting, pull requests, issue tracking, CI/CD (Gitea Actions)
+- Package registry, OAuth2/LDAP auth, GitHub-compatible API
+- Runs on minimal hardware (~100MB RAM on Raspberry Pi)
+
+ARCHITECTURE:
+- Layers: Web UI (templates) -> API (chi router) -> Service -> Model (XORM) -> Git + Storage
+- Single binary with embedded assets (Go embed directive)
+- SQLite as default database for zero-config deployment
+- Queue system for background jobs (webhooks, notifications, indexing)
+
+KEY GO PATTERNS DEMONSTRATED:
+- Git Object Model: blobs, trees, commits with SHA-1 hashing
+- Repository Management: create, fork, star, search repositories
+- Issue Tracking: create, comment, close, label, filter issues
+- Pull Request Workflow: create PR, review, approve, merge
+- Webhook System: event-driven notifications to external services
+
+PERFORMANCE TECHNIQUES:
+- Native git commands for fast operations with cached output
+- Careful database index design for common queries
+- In-memory caching for sessions, repository metadata, avatars
+- Background goroutines for webhook delivery and email batching
+- Embedded assets eliminate runtime file I/O
+
+GO PHILOSOPHY:
+- Single binary deployment with SQLite (download, run, done)
+- Low resource consumption thanks to Go's efficient runtime
+- Cross-platform via Go cross-compilation
+- Swappable backends through interfaces (auth, storage, database)
+*/

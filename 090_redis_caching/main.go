@@ -601,3 +601,24 @@ MEJORES PRÁCTICAS:
 4. Usar pipelines para batch
 5. Configurar pool adecuadamente
 */
+
+/*
+SUMMARY - CHAPTER 090: Redis and Caching
+
+TOPIC: Redis Integration and Caching Strategies
+- go-redis/v9: Pure Go Redis client with context support, cluster and sentinel modes
+- Data types: Strings (Set/Get/Incr), Hashes (HSet/HGetAll), Lists (LPush/RPop), Sets (SAdd), ZSets (ZAdd)
+- Cache-Aside pattern: Check cache first, load from DB on miss, populate cache for next request
+- Write-Through pattern: Update DB then immediately update cache for consistency
+- Write-Behind pattern: Update cache first, async queue writes to DB for performance
+- Cache invalidation: TTL expiration, delete on update, pattern delete with SCAN, tag-based grouping
+- Stampede prevention: Use singleflight to deduplicate concurrent requests, distributed locks with SetNX
+- Probabilistic early expiration: Refresh cache proactively before TTL expires to avoid thundering herd
+- Pub/Sub: Publish() and Subscribe() for event-driven architecture and cache invalidation broadcasts
+- Pipelines: Batch multiple commands (Pipeline()) for reduced latency and network roundtrips
+- Transactions: Watch() and TxPipelined() for atomic multi-key operations with optimistic locking
+- Rate limiting: Sliding window with sorted sets, token bucket with Lua scripts for distributed limiting
+- Session storage: JSON-serialized sessions with TTL, automatic expiration for security
+- Connection pooling: PoolSize, MinIdleConns, DialTimeout, ReadTimeout for optimal resource usage
+- Best practices: Always use TTL, prevent cache stampede, monitor hit/miss ratio, use context timeouts
+*/

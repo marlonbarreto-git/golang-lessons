@@ -344,3 +344,42 @@ BUENAS PRÁCTICAS:
 5. Sé consistente: si un método es puntero, todos deberían serlo
 6. Para valores opcionales, considera usar punteros o tipos como sql.NullInt64
 */
+
+/*
+SUMMARY - POINTERS:
+
+CONCEPTOS BÁSICOS:
+- & obtiene la dirección de memoria de una variable
+- * desreferencia un puntero (accede al valor)
+- Zero value de *T es nil
+
+DECLARACIÓN:
+- var p *int (nil pointer)
+- p := new(int) (aloca memoria, retorna puntero)
+- p := &variable (dirección de variable existente)
+
+PASO POR VALOR VS REFERENCIA:
+- Go SIEMPRE pasa por valor
+- Pasar puntero permite modificar el original
+- Slices, maps, channels y funciones ya son referencias
+
+PUNTEROS Y STRUCTS:
+- Go hace dereferencia automática: ptr.Campo = (*ptr).Campo
+- Receptores puntero modifican el struct original
+- Receptores valor trabajan con una copia
+
+CUÁNDO USAR PUNTEROS:
+- Para modificar el valor original
+- Structs grandes (evitar copias costosas)
+- Representar ausencia de valor (nil)
+- Consistencia en receptores de métodos
+
+ESCAPE ANALYSIS:
+- Go decide automáticamente stack vs heap
+- Variables que "escapan" (retornadas por puntero) van al heap
+- go build -gcflags="-m" para ver escape analysis
+
+VALORES OPCIONALES:
+- Usar *int, *bool para campos opcionales en structs
+- nil indica "no establecido", diferente del zero value
+*/

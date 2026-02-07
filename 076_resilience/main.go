@@ -1845,3 +1845,43 @@ TESTING:
 - Property testing:    Verificar invariantes (nunca excede rate)
 - Integration:         Simular escenarios de fallo reales
 */
+
+/* SUMMARY - RESILIENCE PATTERNS:
+
+TOPIC: Patrones de resiliencia para sistemas distribuidos en producción
+
+RATE LIMITING:
+- Token Bucket con golang.org/x/time/rate (10 req/s, burst 20)
+- Sliding Window para precisión con Redis sorted sets
+- Per-client limiters con sync.Map para multiples usuarios
+- Headers: X-RateLimit-Limit, Remaining, Reset
+
+CIRCUIT BREAKER:
+- Closed → Open → Half-Open → Closed (sony/gobreaker)
+- Fail fast cuando dependencia falla (evitar cascading failures)
+- MaxRequests en half-open, Timeout para reset automático
+
+RETRY & BACKOFF:
+- Exponential backoff con jitter (evitar thundering herd)
+- cenkalti/backoff para políticas complejas
+- Idempotency keys para reintentos seguros
+
+BULKHEAD & TIMEOUTS:
+- Channel semaphores para limitar concurrencia por servicio
+- Context timeouts en toda operación I/O
+- Cascading budgets: propagar tiempo restante entre capas
+
+LOAD SHEDDING:
+- Rechazar requests proactivamente cuando sobrecargado
+- Basado en concurrencia (in-flight) o latencia (adaptive)
+- Prioridades: Critical nunca shed, Low shed primero
+
+GRACEFUL DEGRADATION:
+- Fallback chain: Primary → Cache → Defaults
+- Feature flags para desactivar funcionalidades no-críticas
+- Health levels: OK, Degraded, Down
+
+STACK RESILIENCE (orden de aplicación):
+1. Rate Limiter → 2. Load Shedder → 3. Timeout → 4. Bulkhead
+5. Circuit Breaker → 6. Retry + Backoff → 7. Fallback
+*/

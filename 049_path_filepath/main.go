@@ -402,6 +402,46 @@ COMMON MISTAKE:
 	fmt.Println("\n=== End of Chapter 049 ===")
 }
 
+/*
+SUMMARY - Chapter 049: Path and Filepath Packages
+
+PATH PACKAGE (URL-STYLE):
+- Works with forward-slash separated paths
+- Use for URLs, archive paths, platform-independent paths
+- path.Join, Base, Dir, Ext, Clean, Split, Match, IsAbs
+- Do NOT use for filesystem paths on Windows
+
+FILEPATH PACKAGE (OS-NATIVE):
+- Works with OS-native paths (/ on Unix, \ on Windows)
+- Use for ALL filesystem operations
+- filepath.Join, Base, Dir, Ext, Clean, Split, Match
+- filepath.Abs: resolve to absolute path
+- filepath.Rel: compute relative path between two paths
+- filepath.FromSlash/ToSlash: convert path separators
+- filepath.EvalSymlinks: resolve symbolic links
+
+FILEPATH.GLOB:
+- Match files on disk using shell-like patterns
+- * matches non-separator chars, ? matches single char
+- [abc] character class, [a-z] character range
+
+FILEPATH.WALKDIR (GO 1.16+):
+- Preferred over Walk (uses fs.DirEntry, much faster)
+- Return nil to continue, fs.SkipDir to skip directory
+- fs.SkipAll to stop entirely (Go 1.20+)
+- Walk calls os.Lstat per entry (slow), WalkDir does not
+
+PATH VS FILEPATH:
+- path: URLs, archives, abstract paths (always /)
+- filepath: filesystem operations (OS separator)
+- Common mistake: using path for filesystem on Windows
+
+PRACTICAL PATTERNS:
+- Safe path joining to prevent directory traversal
+- Finding files by extension recursively
+- Extracting filename without extension
+*/
+
 func findByExtension(root, ext string) []string {
 	var results []string
 	filepath.WalkDir(root, func(p string, d fs.DirEntry, err error) error {

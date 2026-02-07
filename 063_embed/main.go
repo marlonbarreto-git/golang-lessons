@@ -462,3 +462,19 @@ SEGURIDAD:
 - El contenido es extraíble del binario
 - Usar para conveniencia, no protección
 */
+
+/* SUMMARY - CHAPTER 063: Embed Files
+Topics covered in this chapter:
+
+• go:embed directive: embedding files and directories into Go binaries
+• Embed types: string, []byte, embed.FS for different use cases
+• Pattern syntax: specific files, directories, glob patterns, all: prefix for hidden files
+• embed.FS methods: Open, ReadDir, ReadFile for accessing embedded content
+• HTTP integration: serving embedded files with http.FileServer(http.FS(embedFS))
+• Template integration: using template.ParseFS for embedded templates
+• Filesystem operations: fs.Sub for subdirectories, fs.WalkDir for traversal
+• Use cases: single binary deployment, web assets, templates, SQL migrations, default configs
+• Rules and constraints: package-level vars only, no blank lines, relative paths, compile-time only
+• Security considerations: embedded content is extractable, not for secrets
+• Best practices: organizing embedded files, subdirectory structure, documentation
+*/

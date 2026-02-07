@@ -416,6 +416,48 @@ Go strings are UTF-8. BOM can cause issues with comparisons.`)
 	fmt.Println("\n=== End of Chapter 050 ===")
 }
 
+/*
+SUMMARY - Chapter 050: Unicode, UTF-8, and UTF-16 Packages
+
+STRINGS AND RUNES:
+- Go strings are read-only byte slices (usually UTF-8)
+- rune = int32, represents a Unicode code point
+- len(s) counts bytes, utf8.RuneCountInString counts runes
+- for range on string iterates runes (decodes UTF-8)
+
+UNICODE/UTF8 PACKAGE:
+- DecodeRune/DecodeRuneInString: decode first rune
+- DecodeLastRune/DecodeLastRuneInString: decode last rune
+- EncodeRune: write rune as UTF-8 to []byte
+- AppendRune: append rune as UTF-8 (Go 1.18+)
+- RuneCount/RuneCountInString: count runes
+- RuneLen: bytes needed for a rune (1-4)
+- Valid/ValidString: check valid UTF-8
+- ValidRune: check valid Unicode code point
+- FullRune: check if bytes begin with complete rune
+- Constants: RuneError, RuneSelf, UTFMax, MaxRune
+
+UNICODE/UTF16 PACKAGE:
+- Encode: runes to []uint16 (UTF-16)
+- Decode: []uint16 to runes
+- EncodeRune/DecodeRune: surrogate pair handling
+- IsSurrogate: check if rune is surrogate half
+- Code points above U+FFFF use surrogate pairs
+
+UNICODE PACKAGE:
+- Classification: IsLetter, IsDigit, IsNumber, IsSpace
+- Case: IsUpper, IsLower, IsTitle
+- Types: IsPunct, IsSymbol, IsControl, IsPrint, IsGraphic, IsMark
+- Conversion: ToUpper, ToLower, ToTitle, SimpleFold
+- Range tables: Latin, Greek, Cyrillic, Han, Hiragana, etc.
+- unicode.Is(table, r) and unicode.In(r, tables...) for script detection
+
+BOM HANDLING:
+- UTF-8 BOM: [0xEF, 0xBB, 0xBF]
+- Strip BOM with strings.HasPrefix check
+- BOM can cause unexpected string comparison failures
+*/
+
 func stripBOM(s string) string {
 	if strings.HasPrefix(s, "\xef\xbb\xbf") {
 		return s[3:]

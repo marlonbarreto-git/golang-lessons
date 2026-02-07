@@ -319,3 +319,32 @@ func fibonacci(n int) *big.Int {
 	}
 	return b
 }
+
+/*
+SUMMARY - MATH/BIG, MATH/BITS & MATH/RAND/V2:
+
+MATH/BIG - ARBITRARY PRECISION ARITHMETIC:
+- big.Int for integers of unlimited size (factorials, crypto, Fibonacci)
+- big.Float for configurable precision floating point (256+ bits)
+- big.Rat for exact rational arithmetic (no precision loss)
+- Operations: Add, Sub, Mul, Div, Mod, Exp, GCD, ModInverse, ProbablyPrime
+
+MATH/BITS - OPTIMIZED BIT MANIPULATION:
+- OnesCount (popcount), Len, TrailingZeros, LeadingZeros
+- RotateLeft, ReverseBytes, Reverse for bit-level transformations
+- Add64, Mul64, Sub64, Div64 for extended arithmetic with carry/borrow
+- All functions have 8, 16, 32, 64 bit variants
+
+MATH/RAND/V2 - NEW RANDOM API (Go 1.22+):
+- Global source uses ChaCha8 (cryptographically secure by default)
+- No Seed() needed - auto-initialized
+- Generic N[T]() for any numeric type including time.Duration
+- IntN replaces Intn, deterministic sources: PCG and ChaCha8
+- rand.Shuffle for randomizing slices
+
+PRACTICAL EXAMPLES:
+- Computing large factorials (50!)
+- Fibonacci with arbitrary precision (Fib(500))
+- Network mask analysis using bit counting
+- Power-of-2 detection with OnesCount
+*/

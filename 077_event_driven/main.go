@@ -2466,3 +2466,46 @@ TESTING:
 - Contract testing para schemas de eventos
 - Testcontainers para Kafka/NATS/RabbitMQ
 */
+
+/* SUMMARY - EVENT-DRIVEN ARCHITECTURE, CQRS & EVENT SOURCING:
+
+TOPIC: Arquitectura orientada a eventos y separación de responsabilidades
+
+EVENT-DRIVEN ARCHITECTURE:
+- Comunicación asíncrona via eventos (desacoplamiento, escalabilidad)
+- Domain Events en pasado: OrderPlaced, PaymentReceived
+- Event Bus: Fan-out (todos reciben) vs Competing (uno procesa)
+- Brokers: Kafka (alto throughput), NATS (baja latencia), RabbitMQ (flexible)
+
+CQRS (COMMAND QUERY RESPONSIBILITY SEGREGATION):
+- Commands: imperativo (CreateOrder), puede fallar
+- Queries: lectura sin side effects (GetOrderByID)
+- Command Bus y Query Bus para dispatch
+- Write Model vs Read Model (eventual consistency)
+
+EVENT SOURCING:
+- Almacenar TODOS los eventos, no solo estado actual
+- Event Store con optimistic concurrency (versioning)
+- Aggregate Root: valida comandos, genera eventos
+- Projections: vistas materializadas desde stream de eventos
+- Snapshots: evitar replay completo (cada N eventos)
+
+SAGA PATTERN:
+- Transacciones distribuidas con compensaciones
+- Orchestration: coordinador central
+- Choreography: eventos entre servicios (más desacoplado)
+
+OUTBOX PATTERN:
+- Resolver dual-write problem (DB + broker)
+- Evento en misma transacción que el cambio
+- Relay separado publica eventos pendientes
+
+IDEMPOTENCIA & VERSIONING:
+- Deduplication table con event_id
+- Upcasting: transformar eventos al leer
+- NUNCA eliminar/cambiar campos existentes
+
+TESTING:
+- In-memory Event Bus para integration tests
+- Watermill para Pub/Sub abstraction
+*/

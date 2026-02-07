@@ -10,6 +10,9 @@ import (
 func main() {
 	fmt.Println("=== MÓDULOS EN GO ===")
 
+	// ============================================
+	// MÓDULOS, GO.MOD Y COMANDOS
+	// ============================================
 	fmt.Println(`
 Los módulos son la unidad de distribución de código en Go.
 Un módulo es una colección de paquetes relacionados.
@@ -224,6 +227,9 @@ BUENAS PRÁCTICAS:
 5. Usar replace solo temporalmente en desarrollo
 6. Documentar razones de exclude/replace
 7. Para librerías: soportar últimas 2-3 versiones de Go`)
+	// ============================================
+	// EJEMPLO PRÁCTICO
+	// ============================================
 	fmt.Println("\n--- Ejemplo Práctico ---")
 
 	fmt.Println(`
@@ -305,4 +311,48 @@ GOPRIVATE=github.com/mycompany/*
 
 WORKSPACES:
 go work init ./mod1 ./mod2
+*/
+
+/*
+SUMMARY - CHAPTER 028: MODULES
+
+MODULE BASICS:
+- Modules are the unit of code distribution in Go
+- Created with go mod init <module-path>
+- go.mod defines module and dependencies
+- go.sum stores cryptographic checksums (always commit)
+
+VERSIONING:
+- Semantic versioning: vMAJOR.MINOR.PATCH
+- v0 = development, unstable API
+- v1+ = stable API, backward compatible
+- v2+ requires /v2 in import path and module declaration
+
+COMMANDS:
+- go get pkg@version: add or update dependency
+- go mod tidy: clean unused dependencies
+- go mod download: download dependencies
+- go mod verify: verify checksums
+- go mod vendor: create local vendor directory
+
+GO.MOD DIRECTIVES:
+- require: declare dependencies
+- exclude: block specific versions
+- replace: use local or forked versions
+- retract: mark versions as withdrawn
+- tool: development tools (Go 1.24+)
+
+PRIVATE MODULES:
+- GOPRIVATE: skip proxy for private repos
+- Configure git access via SSH or tokens
+
+WORKSPACES (Go 1.18+):
+- go work init: create workspace for multi-module development
+- Useful for local development across modules
+
+BEST PRACTICES:
+- Always commit go.mod and go.sum
+- Run go mod tidy before commits
+- Use specific versions in production
+- Review security updates regularly
 */

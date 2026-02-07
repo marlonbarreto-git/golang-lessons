@@ -873,3 +873,21 @@ DESVENTAJAS:
 - Debugging más difícil
 - Dependencias adicionales
 */
+
+/* SUMMARY - CHAPTER 069: Code Generation
+Topics covered in this chapter:
+
+• go generate: //go:generate directive for running commands during build
+• stringer: generating String() methods for enum-like constants
+• mockgen: generating mocks from interfaces for testing with gomock
+• protoc: generating Go code from Protocol Buffer definitions
+• sqlc: generating type-safe Go code from SQL queries
+• Custom generators: using text/template for code generation
+• AST manipulation: go/parser, go/ast, go/token for parsing Go code
+• go/format and go/printer: formatting generated code
+• jennifer library: programmatic Go code generation
+• Best practices: "DO NOT EDIT" comments, *_gen.go conventions, committing generated code
+• CI/CD integration: running go generate in pipelines, verifying no changes
+• Advantages: type safety, reducing boilerplate, consistency, DRY principle
+• Disadvantages: complex setup, increased build time, debugging difficulty
+*/

@@ -414,3 +414,23 @@ HERRAMIENTAS:
 - ELK / Loki
 - Datadog / New Relic
 */
+
+/*
+SUMMARY - CHAPTER 101: Observability
+
+TOPIC: Logging, Metrics, and Tracing
+- slog (Go 1.21+): Structured logging with JSON/text handlers, log levels (Debug/Info/Warn/Error), key-value pairs
+- Logger context: slog.With() adds default attributes, create per-request loggers with request_id/trace_id
+- Custom handlers: Wrap slog.Handler to add service name, environment, or modify records automatically
+- Prometheus metrics: Counter (incremental), Gauge (up/down), Histogram (distribution), Summary (percentiles)
+- promauto package: NewCounterVec/NewGauge/NewHistogramVec with labels for dimensions, promhttp.Handler()
+- OpenTelemetry tracing: otel.Tracer() creates spans, span.SetAttributes() adds metadata, span.RecordError()
+- Span propagation: otelhttp.NewTransport for client, otelhttp.NewHandler for server, automatic context propagation
+- Distributed tracing: Jaeger/Zipkin exporters, trace.NewTracerProvider() with batching, resource attributes
+- Health checks: /healthz for liveness (is process alive?), /readyz for readiness (can accept traffic?)
+- Health checker pattern: Interface with Check(ctx) method, aggregate multiple checks, return 503 if unhealthy
+- Observable middleware: Combine logging + metrics + tracing in single middleware for consistency
+- Request ID: Generate UUID, propagate in headers (X-Request-ID), include in logs and trace attributes
+- Observability pillars: Logs (what happened), Metrics (how much), Traces (where time spent)
+- Best practices: Structured logging, consistent log levels, metrics with appropriate cardinality, trace sampling
+*/

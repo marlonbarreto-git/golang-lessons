@@ -328,3 +328,44 @@ go run -race main.go
 go test -race ./...
 go build -race
 */
+
+/*
+SUMMARY - CHAPTER 030: GOROUTINES
+
+GOROUTINE BASICS:
+- Lightweight concurrent execution units (~2KB initial stack)
+- Launch with go keyword
+- Managed by Go runtime scheduler
+- Use goroutines for concurrent operations, not parallelism by default
+
+CREATING GOROUTINES:
+- go function(): launch named function
+- go func() { }(): anonymous function
+- Pass variables as parameters to avoid capture issues
+
+SYNCHRONIZATION:
+- sync.WaitGroup: wait for multiple goroutines to complete
+- wg.Add(n), wg.Done(), wg.Wait()
+- wg.Go(fn): modern helper (Go 1.25+)
+
+COMMON PITFALLS:
+- Variable capture in loops: pass as parameter
+- Race conditions: multiple goroutines accessing shared data
+- Goroutine leaks: goroutines blocked forever
+
+RACE DETECTION:
+- go run -race: detect data races at runtime
+- go test -race: run tests with race detector
+- Use sync.Mutex or atomic for shared data
+
+SCHEDULER:
+- M:N scheduling (M OS threads, N goroutines)
+- Preemptive scheduler (Go 1.14+)
+- GOMAXPROCS controls parallelism level
+- Goroutines yield on I/O, channel ops, runtime calls
+
+GOROUTINES VS THREADS:
+- Much lighter than OS threads
+- Millions possible vs thousands
+- Communicate via channels, not shared memory
+*/

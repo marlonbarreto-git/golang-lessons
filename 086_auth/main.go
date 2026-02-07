@@ -1061,3 +1061,28 @@ SEGURIDAD:
 - SameSite strict/lax
 - Invalidar sesiones al cambiar password
 */
+
+/* SUMMARY - AUTHENTICATION AND AUTHORIZATION IN GO:
+
+TOPIC: Implementing secure authentication and authorization systems
+- JWT with golang-jwt/jwt/v5 for stateless authentication
+- Claims struct with UserID, Email, Roles plus RegisteredClaims (exp, iat, nbf, iss, sub, jti)
+- HS256 (HMAC-SHA256) or RS256 (RSA) signing methods
+- Access tokens short-lived (15 min), refresh tokens long-lived (7 days)
+- JWT middleware extracts Bearer token, validates, adds claims to context
+- OAuth2 with golang.org/x/oauth2 for delegated authentication
+- Authorization Code flow for web apps with state parameter for CSRF protection
+- Client Credentials flow for server-to-server authentication
+- OIDC extends OAuth2 with ID token (JWT) for identity information
+- Nonce in OIDC for replay attack prevention
+- Session management with gorilla/sessions supporting cookies and Redis
+- Cookie options: HttpOnly, Secure, SameSite for security
+- Password hashing with bcrypt (cost 10-12) or argon2 (more secure, resource intensive)
+- Never store plaintext passwords, always use constant-time comparison
+- RBAC with roles (user, admin) and permissions (read, write, delete)
+- Middleware patterns: Authenticated, RequireRole, RequirePermission
+- Casbin for complex RBAC/ABAC authorization policies
+- Session invalidation on password change or logout
+- Refresh token rotation for security
+- Rate limiting on login endpoints to prevent brute force
+*/

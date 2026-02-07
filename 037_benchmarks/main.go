@@ -12,6 +12,9 @@ import (
 func main() {
 	fmt.Println("=== BENCHMARKS EN GO ===")
 
+	// ============================================
+	// BENCHMARK BASICS
+	// ============================================
 	os.Stdout.WriteString(`
 Este archivo explica benchmarks. Los benchmarks reales están en main_test.go.
 
@@ -187,8 +190,206 @@ func BenchmarkStringConcat(b *testing.B) {
 
 `)
 
+	// ============================================
+	// RUNTIME INFO
+	// ============================================
 	fmt.Printf("\nGOMAXPROCS: %d\n", runtime.GOMAXPROCS(0))
 	fmt.Printf("NumCPU: %d\n", runtime.NumCPU())
+
+	// ============================================
+	// b.ReportAllocs() DEEP DIVE
+	// ============================================
+	fmt.Println("\n--- b.ReportAllocs() ---")
+	os.Stdout.WriteString(`
+b.ReportAllocs() enables memory allocation statistics for the benchmark.
+Equivalent to running with -benchmem flag but per-benchmark.
+
+func BenchmarkSliceAppend(b *testing.B) {
+    b.ReportAllocs()
+    for i := 0; i < b.N; i++ {
+        s := make([]int, 0)
+        for j := 0; j < 100; j++ {
+            s = append(s, j)
+        }
+    }
+}
+
+func BenchmarkSlicePrealloc(b *testing.B) {
+    b.ReportAllocs()
+    for i := 0; i < b.N; i++ {
+        s := make([]int, 0, 100)
+        for j := 0; j < 100; j++ {
+            s = append(s, j)
+        }
+    }
+}
+
+Output shows:
+  BenchmarkSliceAppend-8     500000   3200 ns/op   2040 B/op   8 allocs/op
+  BenchmarkSlicePrealloc-8  1000000   1100 ns/op    896 B/op   1 allocs/op
+
+The allocs/op and B/op columns reveal allocation behavior.
+Use this to identify and reduce allocations in hot paths.
+`)
+
+	// ============================================
+	// b.ResetTimer() DEEP DIVE
+	// ============================================
+	fmt.Println("--- b.ResetTimer() ---")
+	os.Stdout.WriteString(`
+b.ResetTimer() zeroes the elapsed benchmark time and memory counters.
+Use it after expensive setup that should NOT count toward the measurement.
+
+func BenchmarkDatabaseQuery(b *testing.B) {
+    // Expensive setup
+    db := connectToTestDB()
+    populateTestData(db, 10000)
+
+    b.ResetTimer() // Reset: setup time doesn't count
+
+    for i := 0; i < b.N; i++ {
+        db.Query("SELECT * FROM users WHERE id = ?", i)
+    }
+}
+
+b.StopTimer() / b.StartTimer() for per-iteration setup:
+
+func BenchmarkSort(b *testing.B) {
+    for i := 0; i < b.N; i++ {
+        b.StopTimer()
+        data := generateRandomSlice(1000) // don't measure this
+        b.StartTimer()
+
+        sort.Ints(data) // only measure this
+    }
+}
+
+WARNING: StopTimer/StartTimer add overhead. Prefer ResetTimer
+for one-time setup. Use StopTimer/StartTimer only when needed.
+`)
+
+	// ============================================
+	// SUB-BENCHMARKS
+	// ============================================
+	fmt.Println("--- Sub-Benchmarks ---")
+	os.Stdout.WriteString(`
+Sub-benchmarks use b.Run() to organize and parameterize benchmarks.
+
+func BenchmarkMapAccess(b *testing.B) {
+    for _, size := range []int{10, 100, 1000, 10000} {
+        b.Run(fmt.Sprintf("size-%d", size), func(b *testing.B) {
+            m := make(map[int]int, size)
+            for i := 0; i < size; i++ {
+                m[i] = i
+            }
+            b.ResetTimer()
+            for i := 0; i < b.N; i++ {
+                _ = m[i%size]
+            }
+        })
+    }
+}
+
+Output:
+  BenchmarkMapAccess/size-10-8      200000000   8 ns/op
+  BenchmarkMapAccess/size-100-8     100000000   12 ns/op
+  BenchmarkMapAccess/size-1000-8     50000000   18 ns/op
+  BenchmarkMapAccess/size-10000-8    30000000   35 ns/op
+
+Run specific sub-benchmark:
+  go test -bench=BenchmarkMapAccess/size-1000
+  go test -bench=/size-10$   (regex match)
+`)
+
+	// ============================================
+	// BENCHMARK COMPARISON TOOLS
+	// ============================================
+	fmt.Println("--- Benchmark Comparison Tools ---")
+	os.Stdout.WriteString(`
+BENCHSTAT: Statistical comparison of benchmark results.
+
+Install:
+  go install golang.org/x/perf/cmd/benchstat@latest
+
+Usage:
+  # Run benchmarks multiple times for statistical significance
+  go test -bench=. -count=10 > old.txt
+
+  # Make your optimization changes
+
+  go test -bench=. -count=10 > new.txt
+
+  # Compare
+  benchstat old.txt new.txt
+
+Output:
+  name       old time/op  new time/op  delta
+  Parse-8    450ns ± 3%   320ns ± 2%   -28.89%  (p=0.000 n=10+10)
+  Format-8   1.2µs ± 1%   1.1µs ± 2%    -8.33%  (p=0.001 n=10+10)
+
+The p-value and confidence interval tell you if the change is real.
+
+---
+
+BENCHCMP (deprecated, use benchstat):
+  benchcmp old.txt new.txt
+
+---
+
+TIPS FOR RELIABLE COMPARISONS:
+  1. Use -count=10 or higher for statistical significance
+  2. Close other applications during benchmarking
+  3. Run on the same hardware with consistent load
+  4. Use -benchtime=3s for more stable results
+  5. Check the ± variance - high variance means unreliable
+`)
+
+	// ============================================
+	// PROFILING FROM BENCHMARKS
+	// ============================================
+	fmt.Println("--- Profiling from Benchmarks ---")
+	os.Stdout.WriteString(`
+Benchmarks can generate CPU and memory profiles for pprof analysis.
+
+CPU PROFILE:
+  go test -bench=BenchmarkFoo -cpuprofile=cpu.prof
+  go tool pprof cpu.prof
+
+MEMORY PROFILE:
+  go test -bench=BenchmarkFoo -memprofile=mem.prof
+  go tool pprof mem.prof
+
+BLOCK PROFILE (goroutine blocking):
+  go test -bench=BenchmarkFoo -blockprofile=block.prof
+  go tool pprof block.prof
+
+MUTEX PROFILE (mutex contention):
+  go test -bench=BenchmarkFoo -mutexprofile=mutex.prof
+  go tool pprof mutex.prof
+
+PPROF COMMANDS:
+  (pprof) top 10          # top 10 functions by time
+  (pprof) list FuncName   # show annotated source
+  (pprof) web             # open flame graph in browser
+  (pprof) svg > out.svg   # export as SVG
+
+TRACE:
+  go test -bench=BenchmarkFoo -trace=trace.out
+  go tool trace trace.out
+
+EXAMPLE WORKFLOW:
+  # 1. Identify slow function with benchmark
+  go test -bench=BenchmarkParse -cpuprofile=cpu.prof
+
+  # 2. Analyze with pprof
+  go tool pprof -http=:8080 cpu.prof
+
+  # 3. Look at flame graph, find hot paths
+  # 4. Optimize the hot path
+  # 5. Re-run benchmark to verify improvement
+  go test -bench=BenchmarkParse -count=10 > new.txt
+  benchstat old.txt new.txt
+`)
 }
 
 // Funciones para benchmarking (ver main_test.go)
@@ -265,4 +466,57 @@ BUENAS PRÁCTICAS:
 5. Evitar optimización del compilador
 6. Benchmarkear casos reales
 7. Usar sub-benchmarks para comparar
+*/
+
+/*
+SUMMARY - CHAPTER 037: BENCHMARKS
+
+BENCHMARK BASICS:
+- Integrated in testing package
+- Measure performance and memory usage
+- Coverage-guided optimization
+- Statistical comparison with benchstat
+
+STRUCTURE:
+- func BenchmarkXxx(b *testing.B)
+- Loop b.N times (determined automatically)
+- b.Loop() modern style (Go 1.24+)
+
+RUNNING BENCHMARKS:
+- go test -bench=.: run all benchmarks
+- go test -bench=BenchmarkName: specific benchmark
+- -benchmem: include memory statistics
+- -count=N: run N times for statistical significance
+- -benchtime=Ns: run for N seconds
+
+TIMING CONTROL:
+- b.ResetTimer(): zero timer after setup
+- b.StopTimer()/b.StartTimer(): pause/resume
+- Only measured code contributes to results
+
+MEMORY PROFILING:
+- b.ReportAllocs(): enable allocation tracking
+- Shows B/op (bytes per op) and allocs/op
+- Identify allocation hotspots
+
+SUB-BENCHMARKS:
+- b.Run(name, func): organize related benchmarks
+- Compare implementations side-by-side
+- Parameterize with different inputs
+
+AVOIDING COMPILER OPTIMIZATION:
+- Assign to global variable
+- Use result in meaningful way
+- Prevent dead code elimination
+
+BENCHSTAT:
+- Statistical comparison tool
+- go test -count=10 > old.txt
+- benchstat old.txt new.txt
+- Shows confidence intervals and p-values
+
+PROFILING FROM BENCHMARKS:
+- -cpuprofile=cpu.prof
+- -memprofile=mem.prof
+- go tool pprof for analysis
 */

@@ -110,3 +110,32 @@ ESTRUCTURA DE UN PROGRAMA GO:
    - No recibe argumentos (usar os.Args)
    - No retorna valor (usar os.Exit(code))
 */
+
+/*
+SUMMARY - HELLO WORLD:
+
+ESTRUCTURA BÁSICA DE UN PROGRAMA GO:
+- Todo programa ejecutable requiere package main y func main()
+- Los imports se declaran con la palabra clave import
+- fmt es el paquete estándar para entrada/salida formateada
+
+FUNCIONES DE IMPRESIÓN:
+- fmt.Print: sin newline, sin formato
+- fmt.Printf: con formato usando verbos (%s, %d, %v, %T, etc.)
+- fmt.Println: con newline automático y espacios entre argumentos
+
+VERBOS DE FORMATO:
+- %v valor genérico, %T tipo, %d entero, %s string, %f float
+- %b binario, %o octal, %x hexadecimal, %q string con comillas
+- %p puntero, %t boolean, %e notación científica
+
+INFORMACIÓN DEL SISTEMA:
+- runtime.Version(), runtime.GOOS, runtime.GOARCH, runtime.NumCPU()
+- os.Args para argumentos de línea de comandos
+
+COMANDOS BÁSICOS:
+- go run: compila y ejecuta
+- go build: genera ejecutable
+- go fmt: formatea código
+- go vet: analiza errores comunes
+*/

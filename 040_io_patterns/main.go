@@ -1699,3 +1699,55 @@ PRINCIPIOS:
   5. Para archivos grandes, SIEMPRE streaming (nunca ReadAll)
   6. io.Copy es tu mejor amigo para transferencias eficientes`)
 }
+
+/*
+SUMMARY - Chapter 040: I/O Patterns
+
+FUNDAMENTAL INTERFACES:
+- io.Reader: Read(p []byte) (n int, err error)
+- io.Writer: Write(p []byte) (n int, err error)
+- io.Closer, io.Seeker, io.ReaderAt, io.WriterAt
+- Combinations: ReadCloser, WriteCloser, ReadWriteCloser, ReadSeeker
+
+IO UTILITIES:
+- io.ReadAll: read everything (careful with memory)
+- io.Copy/CopyN: efficient transfer between Reader and Writer
+- io.TeeReader: bifurcate reading to a Writer
+- io.LimitReader: limit bytes read
+- io.MultiReader: concatenate multiple readers
+- io.MultiWriter: fan-out to multiple writers
+- io.Pipe: connect a Writer to a Reader
+- io.NopCloser: add no-op Close to a Reader
+
+KEY IMPLEMENTATIONS:
+- bytes.Buffer: read/write buffer
+- bytes.Reader: read-only over []byte
+- strings.Reader: read-only over string
+- strings.Builder: efficient string building
+- os.File: filesystem files
+
+BUFIO:
+- bufio.Reader: buffered reader (Peek, ReadString, ReadLine)
+- bufio.Writer: buffered writer (always Flush!)
+- bufio.Scanner: token-based reading (lines, words, custom split)
+
+FILESYSTEM:
+- os.Open/Create/OpenFile for file access
+- os.ReadFile/WriteFile for convenience
+- os.ReadDir for directory listing
+- filepath.WalkDir for recursive traversal
+- os.DirFS + io/fs for filesystem abstraction
+
+STREAMING:
+- json.Encoder/Decoder for JSON streaming
+- csv.Reader/Writer for CSV streaming
+- gzip.Reader/Writer for compression/decompression
+- Custom readers for composition and transformation
+
+PRINCIPLES:
+- Accept interfaces, return concrete types
+- Use composition to build transformation pipelines
+- Always defer Close() and bufio.Writer.Flush()
+- For large files, always use streaming (never ReadAll)
+- io.Copy is the most efficient transfer mechanism
+*/

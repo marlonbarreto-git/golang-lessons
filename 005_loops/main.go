@@ -323,3 +323,35 @@ BUENAS PRÁCTICAS:
 5. Prefiere funciones iteradoras para lógica de iteración compleja
 6. Recuerda que range sobre string itera runes, no bytes
 */
+
+/*
+SUMMARY - LOOPS:
+
+FORMAS DE FOR:
+- Tradicional: for i := 0; i < n; i++ { }
+- Como while: for condición { }
+- Infinito: for { } con break para salir
+- Range sobre slices, maps, strings, channels, integers, functions
+
+BREAK Y CONTINUE:
+- break sale del bucle, continue salta a la siguiente iteración
+- Labels permiten break/continue en bucles externos (Outer:)
+
+FOR RANGE:
+- Slices: for i, v := range slice (índice + valor)
+- Maps: for k, v := range mapa (orden NO garantizado)
+- Strings: itera runes (Unicode), no bytes
+- Channels: itera hasta que se cierre el channel
+- Integers (Go 1.22+): for i := range n
+- Functions (Go 1.23+): for v := range iterFunc()
+
+PATRONES COMUNES:
+- Ignorar valores con _: for _, v := range slice
+- Iteración inversa: for i := len(arr)-1; i >= 0; i--
+- Modificar slice: usar índice (range copia valores)
+- No agregar/eliminar durante range (comportamiento indefinido)
+
+FUNCIONES ITERADORAS (Go 1.23+):
+- Retornan func(yield func(T) bool)
+- yield retorna false si el llamador quiere parar
+*/

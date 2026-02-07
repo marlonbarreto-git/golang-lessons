@@ -1,6 +1,6 @@
 # Go Course: From Zero to Ninja 2026
 
-Complete Go (Golang) course updated to 2026 with **126 chapters** organized in **18 parts**, covering everything from Hello World to Go Assembly, WASM, and major Go projects like Docker and Kubernetes. Includes best practices, design patterns, the entire standard library, golang.org/x/ packages, and the latest language features (Go 1.23, 1.24, 1.25, 1.26).
+Complete Go (Golang) course updated to 2026 with **132 chapters** organized in **19 parts**, covering everything from Hello World to Go Assembly, WASM, and major Go projects like Docker and Kubernetes. Includes best practices, design patterns, the entire standard library, golang.org/x/ packages, and the latest language features (Go 1.23, 1.24, 1.25, 1.26).
 
 **Author:** Marlon Barreto (mbarretot@hotmail.com)
 
@@ -222,8 +222,19 @@ Each chapter studies a real-world Go project: architecture, patterns, optimizati
 | 122 | [Gitea](./122_project_gitea/) | Full-stack Go web app, Git service |
 | 123 | [Badger/BoltDB](./123_project_badger_boltdb/) | Embedded KV: LSM tree vs B+ tree |
 | 124 | [Cilium](./124_project_cilium/) | eBPF networking, kernel-level packet processing |
+| 127 | [Ollama](./127_project_ollama/) | Local LLM serving, model management, streaming API |
+| 128 | [TiDB](./128_project_tidb/) | Distributed SQL, Raft consensus, MySQL compatible |
+| 129 | [Istio](./129_project_istio/) | Service mesh control plane, xDS, mTLS, traffic routing |
+| 130 | [Milvus](./130_project_milvus/) | Vector database, similarity search, HNSW index, AI/RAG |
 
-### Part XVIII: Philosophy & Mastery
+### Part XVIII: Advanced Testing & Modern Features
+
+| # | Topic | Description |
+|---|-------|-------------|
+| 131 | [Property Testing](./131_property_testing/) | Property-based testing, testing/quick, generators, shrinking |
+| 132 | [JSON v2](./132_json_v2/) | encoding/json/v2, strict mode, omitzero, migration from v1 |
+
+### Part XIX: Philosophy & Mastery
 
 | # | Topic | Description |
 |---|-------|-------------|

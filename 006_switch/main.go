@@ -337,3 +337,35 @@ BUENAS PRÁCTICAS:
 4. Type switch es la forma idiomática de manejar interface{}
 5. Siempre incluye default para manejar casos inesperados
 */
+
+/*
+SUMMARY - SWITCH:
+
+SWITCH BÁSICO:
+- No requiere break (implícito en Go)
+- Soporta múltiples valores por case: case "a", "b", "c":
+- Switch con inicialización: switch v := expr; { }
+
+SWITCH SIN EXPRESIÓN:
+- Equivale a switch true { }, reemplaza if-else largos
+- Cada case evalúa una condición booleana
+
+FALLTHROUGH:
+- Explícito con keyword fallthrough
+- Continúa al siguiente case sin evaluar su condición
+- Raro de usar, preferir múltiples valores por case
+
+TYPE SWITCH:
+- switch v := x.(type) { case int: ... case string: ... }
+- Para verificar tipo dinámico de interface{}
+- Forma idiomática de manejar polimorfismo
+
+BREAK EN SWITCH:
+- break sale del switch, no de bucles externos
+- Usar labels para salir de bucles desde un switch
+
+CASOS PRÁCTICOS:
+- Mapeo de códigos HTTP a mensajes
+- Categorización de valores con rangos
+- Parser de comandos con acciones por caso
+*/

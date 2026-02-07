@@ -373,3 +373,35 @@ if err != nil {
 }
 // código
 */
+
+/*
+SUMMARY - CONDITIONALS:
+
+IF/ELSE BÁSICO:
+- Paréntesis opcionales (no idiomáticos), llaves obligatorias
+- if/else if/else para múltiples condiciones
+
+IF CON INICIALIZACIÓN:
+- if valor := expr; condición { } limita el scope
+- Patrón comma-ok: if v, ok := mapa[key]; ok { }
+- Muy común con errores: if err := fn(); err != nil { }
+
+EARLY RETURN (Guard Clauses):
+- Manejar errores/casos inválidos primero con return
+- Evita anidación excesiva (pyramid of doom)
+- El happy path queda sin indentación
+
+PATRÓN TERNARIO:
+- No existe ?: en Go, usar if/else con variable previa
+- Funciones helper para casos repetidos (max, min)
+
+COMPARACIONES:
+- Punteros y slices se comparan con nil (no con otros valores)
+- Strings con == (comparación lexicográfica)
+- Slices no son comparables con == (solo con nil)
+
+BUENAS PRÁCTICAS:
+- Extraer condiciones complejas a variables descriptivas
+- No más de 2-3 niveles de anidación
+- Evitar else después de return (código muerto)
+*/

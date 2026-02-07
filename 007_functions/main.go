@@ -419,3 +419,39 @@ BUENAS PRÁCTICAS:
 5. Opciones funcionales para configuración flexible
 6. Early return para código más legible
 */
+
+/*
+SUMMARY - FUNCTIONS:
+
+DECLARACIÓN Y PARÁMETROS:
+- func nombre(params) retorno { }
+- Múltiples valores de retorno: func f() (int, error)
+- Retornos nombrados: func f() (area, perimetro int)
+- Parámetros variádicos: func f(nums ...int)
+
+FUNCIONES COMO VALORES (First-Class Citizens):
+- Se asignan a variables, pasan como parámetros, retornan de funciones
+- Funciones anónimas y IIFE (ejecución inmediata)
+- Closures capturan variables del entorno
+
+DEFER:
+- Ejecuta al final de la función en orden LIFO
+- Los argumentos se evalúan al momento del defer
+- Uso principal: cerrar recursos (archivos, conexiones, mutex)
+
+RECURSIÓN:
+- factorial, fibonacci como ejemplos clásicos
+- Go no optimiza tail recursion
+
+MÉTODOS:
+- func (r Tipo) Metodo() para receptor valor
+- func (r *Tipo) Metodo() para receptor puntero (modifica)
+
+GENÉRICOS (Go 1.18+):
+- func Min[T Ordered](a, b T) T para funciones genéricas
+
+PATRONES AVANZADOS:
+- Error return como último valor: func f() (T, error)
+- Opciones funcionales: WithPort(8080), WithTimeout(30)
+- Middleware/decoradores con funciones que retornan funciones
+*/

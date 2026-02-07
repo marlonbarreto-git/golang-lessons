@@ -440,6 +440,49 @@ Before Go 1.20, you had to write:
 	fmt.Println("\n=== End of Chapter 042 ===")
 }
 
+/*
+SUMMARY - Chapter 042: Bytes Package Deep Dive
+
+BYTES.BUFFER:
+- Variable-size buffer implementing io.Reader and io.Writer
+- Zero value is ready to use
+- Write: Write, WriteString, WriteByte, WriteRune, ReadFrom
+- Read: Read, ReadByte, ReadRune, ReadString, ReadBytes, WriteTo
+- Info: Bytes(), String(), Len(), Cap(), Grow(n), Reset()
+- Bytes() returns underlying slice (no copy - shared memory!)
+
+BYTES.READER:
+- Read-only reader over []byte with seeking support
+- Implements io.Reader, io.ReaderAt, io.Seeker
+- NewReader(b), Read, ReadAt, Seek, Len, Size, Reset
+
+COMPARISON FUNCTIONS:
+- Compare(a, b): lexicographic comparison (-1, 0, 1)
+- Equal(a, b): content equality
+- EqualFold(a, b): case-insensitive UTF-8 comparison
+
+SEARCH FUNCTIONS:
+- Contains, ContainsAny, ContainsRune
+- Count, Index, LastIndex
+- HasPrefix, HasSuffix
+
+MANIPULATION FUNCTIONS:
+- Join, Split, SplitN, SplitAfter
+- Replace, ReplaceAll, Map, Repeat
+- ToUpper, ToLower, TrimSpace, Trim, TrimPrefix, TrimSuffix
+
+BYTES VS STRINGS:
+- bytes mirrors strings API for []byte
+- Use bytes for binary data, I/O, mutability, performance
+- Use strings for text processing staying as string
+
+ZERO-COPY TECHNIQUES:
+- Buffer.Bytes() shares memory (no copy)
+- bytes.NewReader wraps existing []byte
+- bytes.Clone (Go 1.20+) for safe independent copy
+- Avoid string([]byte) in hot paths
+*/
+
 func buildProtocolMessage(command string, headers map[string]string, body []byte) string {
 	var buf bytes.Buffer
 	buf.Grow(256)

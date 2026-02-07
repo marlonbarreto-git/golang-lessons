@@ -388,3 +388,64 @@ BUENAS PRÁCTICAS:
 4. No asumir nada del input
 5. Fuzzear boundaries del sistema
 */
+
+/*
+SUMMARY - CHAPTER 039: FUZZING
+
+FUZZING BASICS:
+- Automated testing with random inputs
+- Native support in Go 1.18+
+- Finds bugs, panics, edge cases automatically
+- Coverage-guided mutation
+
+STRUCTURE:
+- func FuzzXxx(f *testing.F)
+- f.Add() to seed corpus with initial examples
+- f.Fuzz() with test function
+- Verify properties, not specific values
+
+RUNNING FUZZING:
+- go test -fuzz=FuzzName: fuzz until failure
+- go test -fuzz=. -fuzztime=30s: fuzz for duration
+- go test -run=FuzzName: run corpus only (no new inputs)
+
+SUPPORTED TYPES:
+- string, []byte
+- int, int8, int16, int32, int64
+- uint, uint8, uint16, uint32, uint64
+- float32, float64
+- bool, rune
+
+PROPERTIES TO VERIFY:
+- No panics: function doesn't crash
+- Round-trip: encode→decode equals original
+- Idempotence: f(f(x)) == f(x)
+- Invariants: mathematical properties hold
+- Equivalence: compare with reference implementation
+
+CORPUS MANAGEMENT:
+- Seeds: f.Add() or testdata/fuzz/FuzzName/
+- Failures saved automatically
+- Commit failures for regression testing
+- go clean -fuzzcache to clear
+
+COVERAGE-GUIDED:
+- Instrumentates code for coverage tracking
+- Mutates inputs to explore new code paths
+- Bit flipping, arithmetic mutations
+- Dictionary-based mutations
+
+WHAT TO FUZZ:
+- Parsers: JSON, XML, Protocol Buffers
+- Validators: email, URL, regex
+- Encoders/Decoders: base64, URL encoding
+- User input handlers
+- Crypto: round-trip tests
+
+BEST PRACTICES:
+- Diverse seed corpus with edge cases
+- Verify properties, not exact values
+- Git commit failing cases
+- Never assume input validity
+- Fuzz system boundaries
+*/

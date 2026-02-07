@@ -428,3 +428,22 @@ CASOS DE USO:
 - Aplicaciones LLM
 - Embedding-based search
 */
+
+/*
+SUMMARY - CHAPTER 105: AI and Machine Learning
+
+TOPIC: AI/ML Integration in Go
+- Gonum: Numerical computing library for matrices (mat.NewDense), statistics (Mean/StdDev/Correlation), linear algebra
+- Gonum capabilities: Matrix operations (Mul/Add/Scale), SVD decomposition, eigenvalues, distributions, linear regression
+- Gorgonia: Neural network framework with computational graphs, automatic differentiation, GPU support
+- Gorgonia training: Define graph with tensors/weights, forward pass, loss calculation, gradient computation, solver optimization
+- ONNX Runtime: Execute models trained in Python (PyTorch/TensorFlow), load .onnx files, prepare tensors, run inference
+- ONNX workflow: Train model in Python ecosystem, export to ONNX format, deploy inference in Go production servers
+- LangChainGo: Framework for LLM applications, supports OpenAI/Ollama, chains for complex workflows, conversation memory
+- LangChain patterns: Simple prompts, prompt templates, conversation chains with memory, streaming responses
+- RAG (Retrieval Augmented Generation): Embeddings for documents, vector store (Qdrant/Pinecone), retriever for context
+- Ollama: Run local models (Llama2, Mistral), generate text, chat interface, embeddings for semantic search
+- Vector databases: Qdrant/Pinecone for similarity search, store embeddings with metadata, cosine similarity queries
+- Embeddings: Convert text to vectors, semantic search, clustering, classification with similarity comparison
+- Use cases: Production inference in Go servers, data pipelines, LLM-powered applications, semantic search systems
+*/

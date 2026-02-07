@@ -448,3 +448,44 @@ BUENAS PRÁCTICAS:
 5. Verifica implementación en compile time: var _ Interface = Tipo{}
 6. Cuidado con nil interface trap
 */
+
+/*
+SUMMARY - INTERFACES:
+
+FUNDAMENTOS:
+- Definen comportamiento (métodos), no datos
+- Implementación IMPLÍCITA (no hay "implements")
+- Interfaces pequeñas (1-3 métodos) son idiomáticas
+
+INTERFACE VACÍA (any):
+- interface{} / any puede contener cualquier valor
+- Usar solo cuando sea necesario
+
+TYPE ASSERTION Y TYPE SWITCH:
+- valor.(Tipo) extrae tipo concreto (panic si falla)
+- valor, ok := i.(Tipo) forma segura
+- switch v := i.(type) { case int: ... }
+
+COMPOSICIÓN:
+- Interfaces se componen de otras interfaces
+- io.ReadWriter = io.Reader + io.Writer
+
+POLIMORFISMO:
+- Diferentes tipos implementan la misma interface
+- Funciones aceptan interfaces para flexibilidad
+
+NIL INTERFACE TRAP:
+- Interface es nil solo si tipo Y valor son nil
+- *T nil asignado a interface NO es nil interface
+
+INTERFACES ESTÁNDAR:
+- fmt.Stringer: String() string
+- error: Error() string
+- io.Reader/Writer/Closer
+- sort.Interface: Len, Less, Swap
+
+PRINCIPIOS DE DISEÑO:
+- "Accept interfaces, return concrete types"
+- Definir interfaces donde se usan, no donde se implementan
+- Verificar en compile time: var _ Interface = Tipo{}
+*/

@@ -577,3 +577,42 @@ BUENAS PRÁCTICAS:
 4. No sobreuses generics - a veces el código específico es más claro
 5. Aprovecha los paquetes slices y maps de la stdlib
 */
+
+/*
+SUMMARY - GENERICS:
+
+FUNCIONES GENÉRICAS:
+- func Min[T cmp.Ordered](a, b T) T
+- El tipo se infiere automáticamente en la mayoría de casos
+- Especificar explícitamente: Min[int64](10, 20)
+
+CONSTRAINTS:
+- any: cualquier tipo
+- comparable: soporta == y !=
+- cmp.Ordered: soporta <, <=, >, >= (Go 1.21+)
+- Personalizados: type Number interface { ~int | ~float64 | ... }
+- ~ incluye tipos con ese underlying type
+
+TIPOS GENÉRICOS:
+- type Stack[T any] struct { items []T }
+- type Pair[T, U any] struct { First T; Second U }
+- type Cache[K comparable, V any] struct { data map[K]V }
+
+MÉTODOS GENÉRICOS:
+- Los métodos usan los type parameters del tipo
+- List[T].Contains(), Map(), Filter()
+
+PAQUETES STDLIB:
+- slices: Sort, Contains, Index, Min, Max, Clone, Equal
+- maps: Keys, Values, Equal (experimental)
+
+CUÁNDO USAR:
+- Estructuras de datos genéricas (Stack, Queue, Tree)
+- Funciones sobre slices/maps de cualquier tipo
+- Evitar duplicación de código tipado
+- NO usar cuando una interface específica es más clara
+
+RESULT TYPE (inspirado en Rust):
+- type Result[T any] struct { value T; err error }
+- Métodos IsOk(), IsErr(), Unwrap(), UnwrapErr()
+*/

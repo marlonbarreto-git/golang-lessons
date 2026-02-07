@@ -540,3 +540,24 @@ BUENAS PRÁCTICAS:
 4. Repository pattern
 5. Prepared statements
 */
+
+/*
+SUMMARY - CHAPTER 089: Databases
+
+TOPIC: Database Integration in Go
+- database/sql package provides generic interface for SQL databases
+- Popular drivers: pgx/lib/pq (PostgreSQL), go-sql-driver (MySQL), modernc.org/sqlite (SQLite)
+- Connection management: Open(), Ping(), pool configuration (MaxOpenConns, MaxIdleConns)
+- Query operations: Query() for multiple rows, QueryRow() for single row, Exec() for mutations
+- Prepared statements: Prepare() for reusable queries, prevents SQL injection, better performance
+- Transactions: Begin()/BeginTx() for atomic operations, use defer for rollback safety
+- Context integration: Always use *Context() versions with timeouts in production
+- NULL handling: sql.NullString, sql.NullInt64, sql.NullBool, or use pointers
+- pgx advantages: faster than lib/pq, native PostgreSQL types, COPY protocol, LISTEN/NOTIFY
+- ORMs: GORM (full-featured), sqlx (lightweight struct scanning), ent (type-safe)
+- Migration tools: golang-migrate, goose, atlas for versioned schema changes
+- Repository pattern: Encapsulate database logic, return domain errors, use interfaces
+- Best practices: Use context with timeout, close rows/statements, check rows.Err(), configure pool
+- Security: Use placeholders ($1, $2) not string concatenation, don't expose DB errors in API
+- Performance: Prepared statements for repeated queries, appropriate indexes, connection pooling
+*/

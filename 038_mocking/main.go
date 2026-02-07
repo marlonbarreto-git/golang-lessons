@@ -453,3 +453,53 @@ PATRONES:
 - Functional options
 - Clock abstraction
 */
+
+/*
+SUMMARY - CHAPTER 038: MOCKING
+
+MOCKING PHILOSOPHY:
+- Go uses interfaces for mocking, no special frameworks required
+- Design code to depend on interfaces, not concrete types
+- Inject dependencies via constructors
+- Keep interfaces small and focused
+
+TEST DOUBLES:
+- Mock: pre-programmed with expectations, verifies calls
+- Stub: returns fixed responses, no verification
+- Spy: records calls for later assertions
+- Fake: working implementation (e.g., in-memory DB)
+
+INTERFACE DESIGN:
+- Define interfaces in consumer package
+- Interface segregation: small, focused interfaces
+- Accept interfaces, return concrete types
+
+DEPENDENCY INJECTION:
+- Constructor injection: func New(dep Interface) *Service
+- Functional options: flexible configuration
+- Field injection: less common, harder to test
+
+COMMON ABSTRACTIONS:
+- Database: Repository interface
+- HTTP client: HTTPClient interface
+- Time: Clock interface with Now() method
+- External APIs: Service interfaces
+
+MANUAL MOCKING:
+- Create struct implementing interface
+- Add fields for configurable behavior
+- Return errors, simulate failures
+- Track call counts (spy pattern)
+
+FRAMEWORKS:
+- testify/mock: expectations, assertions
+- gomock/mockgen: code generation
+- Manual often simpler and clearer
+
+BEST PRACTICES:
+- Mock at system boundaries only
+- Don't mock everything
+- Test behavior, not implementation
+- Avoid mocking standard library unless necessary
+- Keep tests readable and maintainable
+*/

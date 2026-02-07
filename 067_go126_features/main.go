@@ -373,3 +373,20 @@ PLATFORM:
 - windows/arm 32-bit removido
 - Requiere Go 1.24+ para bootstrap
 */
+
+/* SUMMARY - CHAPTER 067: Go 1.26 Features
+Topics covered in this chapter:
+
+• new() with expressions: new(42), new(Point{X: 1}) syntax for creating pointer values
+• SIMD package (experimental): simd/archsimd for vector operations on AMD64
+• SIMD types: Int8x16, Float32x4, Float64x8 for parallel data processing
+• SIMD operations: Add, Mul, And, Or, Shift for vectorized computations
+• crypto/hpke: Hybrid Public Key Encryption implementing RFC 9180
+• Post-quantum KEMs: improved support for quantum-resistant key encapsulation
+• Runtime improvements: concurrent cleanup execution, SetDefaultGOMAXPROCS()
+• VMA names: memory profiling improvements on Linux
+• Compiler optimizations: more slices on stack, -funcalign linker option
+• regexp improvements: case-insensitive named groups, new character classes
+• unique package: more efficient memory reclamation
+• Platform changes: SIMD AMD64 only, windows/arm 32-bit removed, requires Go 1.24+ bootstrap
+*/

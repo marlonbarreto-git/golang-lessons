@@ -901,3 +901,39 @@ d2:
 	fmt.Printf("  Server stats: connections=%d, msgs_sent=%d, bytes=%d\n",
 		stats.Connections, stats.MsgsSent, stats.BytesSent)
 }
+
+/*
+SUMMARY - NATS: CLOUD NATIVE MESSAGING SYSTEM IN GO:
+
+WHAT IS NATS:
+- High-performance cloud-native messaging system written in Go
+- Pub/Sub, Request/Reply, Queue Groups, JetStream persistence
+- Subject-based addressing with wildcard support (* and >)
+- Single ~15MB binary handling millions of messages per second
+
+ARCHITECTURE:
+- Subject Trie for fast O(k) topic matching with wildcards
+- Goroutine-per-connection with read/write loop pairs
+- JetStream engine for durable streams and consumers
+- Interest-based routing: messages flow only where subscribed
+
+KEY GO PATTERNS DEMONSTRATED:
+- Subject Trie: radix tree for efficient wildcard matching
+- Pub/Sub: direct subscribers and wildcard subscriptions
+- Queue Groups: competing consumers for load balancing
+- Request/Reply: synchronous RPC over async messaging
+- JetStream: persistent streams with consumer ack tracking
+
+PERFORMANCE TECHNIQUES:
+- Zero-allocation protocol parsing with byte slices
+- Write coalescing: batch multiple messages into single TCP writes
+- Cached subject matching results with bloom filters
+- Minimal per-connection memory overhead
+- Interest-graph propagation for cluster routing
+
+GO PHILOSOPHY:
+- Simplicity: human-readable text protocol, minimal configuration
+- Channels for internal coordination between goroutines
+- Specific error types for different failure modes
+- Composition: core pub/sub + optional JetStream persistence
+*/

@@ -485,3 +485,62 @@ TIMEOUT:
 CIRCUIT BREAKER:
 - Evitar llamadas a servicios fallidos
 */
+
+/*
+SUMMARY - CHAPTER 035: CONCURRENCY PATTERNS
+
+FAN-OUT / FAN-IN:
+- Fan-out: distribute work to multiple workers
+- Fan-in: merge results from multiple channels
+- Scale processing with multiple goroutines
+
+PIPELINE:
+- Chain processing stages via channels
+- Each stage reads from input, writes to output
+- Composable and testable
+
+WORKER POOL:
+- Fixed number of workers consuming from job channel
+- Control concurrency and resource usage
+- Close jobs channel to shut down workers
+
+SEMAPHORE:
+- Buffered channel limits concurrent operations
+- Send to acquire, receive to release
+- Prevents resource exhaustion
+
+OR-DONE CHANNEL:
+- Wrap channel operations with done signal
+- Propagate cancellation through pipeline
+- Prevents goroutine leaks
+
+GENERATOR:
+- Function returns channel producing values
+- Lazy evaluation, on-demand production
+- Close channel when done
+
+RATE LIMITER:
+- time.Ticker to control operation rate
+- Prevents overwhelming external services
+- Burstable with buffered channel
+
+ERRGROUP:
+- Run tasks concurrently, return first error
+- WaitGroup + error handling combined
+- Stop on first error or collect all
+
+PUBSUB:
+- Broadcast messages to multiple subscribers
+- Each subscriber gets own channel
+- Non-blocking sends with select + default
+
+TIMEOUT PATTERN:
+- context.WithTimeout for operation limits
+- Check ctx.Done() in loops
+- Clean resource cleanup on timeout
+
+CIRCUIT BREAKER:
+- Prevent calls to failing services
+- States: closed, open, half-open
+- Fail fast during outages
+*/

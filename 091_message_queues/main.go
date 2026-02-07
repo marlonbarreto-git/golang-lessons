@@ -987,3 +987,24 @@ MEJORES PRÁCTICAS:
 7. Incluir correlation IDs
 8. Versionar mensajes
 */
+
+/*
+SUMMARY - CHAPTER 091: Message Queues
+
+TOPIC: Asynchronous Messaging Systems
+- Kafka (segmentio/kafka-go): High-throughput event streaming, partition-based distribution, consumer groups
+- Kafka Producer: Writer with batching, compression (Snappy), RequiredAcks for delivery guarantees
+- Kafka Consumer: Reader with consumer groups, auto-commit or manual commit, offset management
+- NATS (nats-io/nats.go): Ultra-fast pub/sub, request/reply pattern, queue groups for load balancing
+- NATS JetStream: Adds persistence, acknowledgments, replay capability, key-value store built-in
+- RabbitMQ (streadway/amqp): AMQP protocol, exchanges (direct/fanout/topic/headers), flexible routing
+- RabbitMQ patterns: Queue/exchange binding, routing keys, publisher confirms, consumer acknowledgments
+- Producer/Consumer patterns: Work queues (competing consumers), Pub/Sub (broadcasting), Request/Reply (RPC)
+- Exactly-once delivery: Idempotency (storing processed message IDs), Transactional Outbox pattern
+- Kafka transactions: Idempotent producer, transactional writes, read committed isolation level
+- Error handling: Exponential backoff retry, Dead Letter Queue (DLQ), circuit breaker, max retry limit
+- Idempotency: Store processed message IDs in Redis/DB, LoadOrStore for deduplication, TTL cleanup
+- Transactional Outbox: DB writes and event publishing in same transaction, background worker publishes
+- Monitoring: Producer/consumer throughput, consumer lag, error rate, processing duration, redelivery rate
+- Best practices: Consumer groups for scaling, manual ACK in production, correlation IDs, message versioning
+*/

@@ -408,3 +408,48 @@ BUENAS PRÁCTICAS:
 4. Cerrar channels para terminar range/select
 5. Buffered channels para evitar bloqueos
 */
+
+/*
+SUMMARY - CHAPTER 032: SELECT
+
+SELECT BASICS:
+- Multiplexes on multiple channel operations
+- Blocks until one case is ready
+- If multiple ready, chooses randomly
+- default case makes select non-blocking
+
+SELECT CASES:
+- Receive: case v := <-ch
+- Send: case ch <- value
+- Timeout: case <-time.After(duration)
+- Context: case <-ctx.Done()
+- Default: case default (non-blocking)
+
+NIL CHANNELS IN SELECT:
+- nil channel never ready
+- Useful to dynamically disable cases
+- Set channel to nil after closing to skip
+
+TIME OPERATIONS:
+- time.After(d): one-shot timeout
+- time.NewTicker(d): recurring ticks
+- Always stop tickers to prevent leaks
+
+COMMON PATTERNS:
+- Timeout: limit operation duration
+- Event loop: for { select { ... } }
+- Fan-in: merge multiple channels with select
+- Racing: return first response
+- Heartbeat: periodic keepalive signals
+
+SELECT EMPTY:
+- select {}: blocks forever
+- Useful for servers that should run indefinitely
+
+BEST PRACTICES:
+- Always provide exit path (timeout, done, context)
+- Use Ticker for loops, After for one-shot
+- Don't create time.After in hot loops (creates timer each time)
+- Nil channels to dynamically disable cases
+- Buffered channels to prevent blocking
+*/

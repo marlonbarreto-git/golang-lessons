@@ -910,3 +910,53 @@ MEJORES PRÁCTICAS:
 9. Encrypt data in transit y at rest
 10. Regular security testing
 */
+
+/* SUMMARY - SECURITY BEST PRACTICES:
+
+TOPIC: Seguridad en aplicaciones Go siguiendo OWASP Top 10
+
+INPUT VALIDATION:
+- go-playground/validator con tags (required, email, min, max)
+- bluemonday para sanitización HTML (UGCPolicy, StrictPolicy)
+- Whitelist sobre blacklist, validar tipo/formato/rango
+- Path traversal: filepath.Clean y verificar baseDir
+
+SQL INJECTION PREVENTION:
+- SIEMPRE usar prepared statements (db.Query(query, $1))
+- sqlx.In para IN clauses dinámicas
+- Whitelist nombres de columnas en ORDER BY
+- sqlc para type-safety generada
+
+XSS PREVENTION:
+- html/template auto-escapa por contexto
+- bluemonday.UGCPolicy() antes de template.HTML()
+- Content-Security-Policy headers
+- JSON encoding escapa automáticamente
+
+CORS & RATE LIMITING:
+- rs/cors con whitelist de origins permitidos
+- golang.org/x/time/rate (10 req/s, burst 20)
+- Per-user limiters con sync.Map
+- Redis para sliding window distribuido
+
+SECURE HEADERS:
+- HSTS, X-Frame-Options: DENY, X-Content-Type-Options: nosniff
+- CSP: default-src 'self'; script-src 'self'
+- unrolled/secure middleware con configuración completa
+
+OWASP TOP 10:
+1. Access Control: verificar authorization siempre
+2. Crypto: bcrypt para passwords (no texto plano)
+3. Injection: prepared statements, validar comandos OS
+4. Design: least privilege, MFA
+5. Misconfiguration: no exponer errores internos
+6. Components: govulncheck para escanear vulnerabilidades
+7. Auth: rate limiting en login, session timeout
+8. Integrity: go.sum, checksums
+9. Logging: structured logs con slog
+10. SSRF: bloquear private IPs en HTTP client
+
+SECRET MANAGEMENT:
+- godotenv para .env en desarrollo
+- HashiCorp Vault, AWS Secrets Manager, Kubernetes Secrets
+*/

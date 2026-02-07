@@ -302,3 +302,22 @@ REGLAS:
 
 ⚠️  USAR SOLO CUANDO ABSOLUTAMENTE NECESARIO
 */
+
+/* SUMMARY - CHAPTER 070: Unsafe Package
+Topics covered in this chapter:
+
+• unsafe.Sizeof, Alignof, Offsetof: inspecting type sizes, alignment, and field offsets
+• Struct padding and optimization: ordering fields by size to minimize padding
+• unsafe.Pointer: generic pointer type for converting between pointer types
+• uintptr: integer representation of pointers for arithmetic operations
+• unsafe.Add (Go 1.17+): safer pointer arithmetic alternative to manual uintptr conversion
+• unsafe.Slice (Go 1.17+): creating slices from pointers with length
+• unsafe.String and StringData (Go 1.20+): zero-copy string/byte conversions
+• SliceData (Go 1.20+): accessing underlying slice data pointer
+• Accessing private fields: using unsafe to bypass encapsulation (not recommended)
+• String to []byte conversions: zero-copy conversions with caveats
+• Slice header manipulation: understanding internal slice structure
+• Use cases: C interop, low-level optimizations, serialization, runtime primitives
+• Safety rules: never store uintptr, atomic operations only, no modifying string literals
+• When to use: only when absolutely necessary, with full understanding of implications
+*/

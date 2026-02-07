@@ -544,6 +544,50 @@ Common pattern: convert between different number bases.
 	fmt.Println("\n=== End of Chapter 041 ===")
 }
 
+/*
+SUMMARY - Chapter 041: Strings & Strconv Deep Dive
+
+STRCONV PARSING:
+- Atoi/Itoa: string<->int conversion
+- ParseBool, ParseInt, ParseUint, ParseFloat: typed parsing
+- ParseInt supports bases 2-36, auto-detect with base 0
+- Errors implement *strconv.NumError (ErrRange, ErrSyntax)
+
+STRCONV FORMATTING:
+- FormatBool, FormatInt, FormatUint, FormatFloat: typed formatting
+- FormatFloat: 'f' decimal, 'e' exponent, 'g' auto
+- AppendInt/AppendFloat/AppendBool: zero-alloc append to []byte
+
+STRCONV QUOTING:
+- Quote/QuoteToASCII: Go string literal quoting
+- QuoteRune: single rune quoting
+- Unquote: reverse of Quote
+
+STRINGS.BUILDER:
+- Efficient string concatenation (implements io.Writer)
+- WriteString, WriteByte, WriteRune, Write methods
+- Grow(n) pre-allocates capacity
+- Must NOT be copied after first use
+
+STRINGS.REPLACER:
+- NewReplacer creates reusable replacer from old/new pairs
+- Safe for concurrent use
+- WriteString writes to io.Writer directly
+
+STRINGS.MAP:
+- Apply function to each rune
+- Return -1 to remove rune from output
+
+STRINGS.FIELDS / FIELDSFUNC:
+- Fields splits on whitespace (handles multiple consecutive)
+- FieldsFunc splits on custom rune predicate
+
+STRINGS.CUT (GO 1.18+):
+- Cut(s, sep) -> before, after, found
+- CutPrefix/CutSuffix (Go 1.20+)
+- Cleaner alternative to Index + slicing
+*/
+
 func formatSize(bytes int64) string {
 	const (
 		KB = 1024

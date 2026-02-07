@@ -405,3 +405,33 @@ func parseConfig(s *scanner.Scanner) map[string]string {
 	}
 	return config
 }
+
+/*
+SUMMARY - TEXT PROCESSING:
+
+TEXT/SCANNER - CONFIGURABLE TOKENIZER:
+- scanner.Scanner with Init(reader) and Scan() loop returning token types
+- Token types: Ident, Int, Float, Char, String, RawString, Comment, EOF
+- s.Mode bitmask controls which token types to recognize
+- s.TokenText() returns current token, s.Pos() returns position
+- Custom config parser example using dotted keys (server.host)
+
+TEXT/TABWRITER - ALIGNED TABULAR OUTPUT:
+- tabwriter.NewWriter(w, minwidth, tabwidth, padding, padchar, flags)
+- Columns separated by \t, rows by \n, call Flush() to align
+- tabwriter.Debug flag adds column separators
+- Useful for CLI help text, reports, and formatted tables
+- Can write to any io.Writer including bytes.Buffer
+
+MIME - CONTENT TYPE IDENTIFICATION:
+- mime.TypeByExtension and ExtensionsByType for MIME lookups
+- mime.FormatMediaType and ParseMediaType for Content-Type headers
+- mime.AddExtensionType to register custom extensions
+
+MIME/MULTIPART - FORM DATA AND FILE UPLOADS:
+- multipart.NewWriter for creating multipart form data
+- WriteField for text fields, CreateFormFile for file uploads
+- FormDataContentType returns the full Content-Type with boundary
+- multipart.NewReader with NextPart() loop or ReadForm() to parse
+- Part.FormName() and Part.FileName() identify field vs file
+*/

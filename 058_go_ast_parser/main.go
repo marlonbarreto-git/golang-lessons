@@ -480,3 +480,34 @@ func calculateComplexity(fn *ast.FuncDecl) int {
 	})
 	return complexity
 }
+
+/*
+SUMMARY - GO AST & PARSER:
+
+GO/TOKEN - TOKENS AND POSITIONS:
+- token.FileSet tracks source positions across files
+- token.IsKeyword, IsIdentifier, Lookup for token classification
+- Token types: IDENT, INT, FLOAT, STRING, FUNC, RETURN, IF, FOR, etc.
+
+GO/PARSER - PARSING GO SOURCE CODE:
+- parser.ParseFile parses a single file into *ast.File
+- parser.ParseDir parses an entire directory
+- Modes: ParseComments, AllErrors, SkipObjectResolution
+- Returns full AST with package name, imports, and declarations
+
+GO/AST - ABSTRACT SYNTAX TREE:
+- ast.File, ast.FuncDecl, ast.GenDecl, ast.ValueSpec, ast.TypeSpec
+- ast.Inspect for pre-order traversal with visitor function
+- ast.Walk with Visitor interface pattern
+- ast.Print for debugging AST structure
+
+GO/FORMAT AND GO/PRINTER:
+- format.Source applies gofmt formatting to source code
+- printer.Fprint regenerates source from AST nodes
+- printer.Config with TabIndent, UseSpaces, SourcePos modes
+
+PRACTICAL EXAMPLES:
+- Linter detecting exported functions/vars without documentation
+- Cyclomatic complexity calculator using AST inspection
+- Extracting function signatures, identifiers, literals, return statements
+*/

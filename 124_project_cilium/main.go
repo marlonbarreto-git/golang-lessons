@@ -1118,3 +1118,40 @@ func demoMiniCilium() {
 	allFlows := cilium.observer.GetFlows(nil)
 	fmt.Printf("  Total observed flows: %d\n", len(allFlows))
 }
+
+/*
+SUMMARY - CILIUM: EBPF-BASED NETWORKING FOR KUBERNETES IN GO:
+
+WHAT IS CILIUM:
+- eBPF-powered networking, security, and observability for Kubernetes
+- CNI plugin, network policy enforcement (L3/L4/L7), load balancing
+- Service mesh without sidecars, Hubble observability, multi-cluster connectivity
+- Used by Google GKE, AWS EKS, Adobe, Capital One, Datadog
+
+ARCHITECTURE:
+- Go control plane: Policy Engine, Endpoint Manager, Service Manager, IPAM, Identity Manager
+- eBPF data plane (C): tc/XDP hooks, socket hooks, cgroup hooks, kprobes
+- Hubble observability layer for flow logs and service maps
+
+KEY GO PATTERNS DEMONSTRATED:
+- Identity Manager: label-based security identities with deduplication
+- Network Policy Engine: identity-based ingress/egress rule evaluation
+- Endpoint Manager: pod lifecycle with policy regeneration
+- Service Load Balancer: round-robin across active backends
+- eBPF Map Simulation: hash maps, LRU maps with eviction
+- Flow Observer: Hubble-like network flow recording and filtering
+
+PERFORMANCE TECHNIQUES:
+- eBPF programs process packets in kernel (no userspace context switches)
+- XDP for earliest possible packet processing (before kernel stack)
+- Connection tracking in eBPF maps (faster than netfilter conntrack)
+- Batched eBPF map updates from Go control plane
+- Per-CPU and RCU-protected lock-free data structures
+
+GO PHILOSOPHY:
+- Clear separation: Go for control plane, C/eBPF for data plane
+- Interfaces for testable datapath implementations
+- Goroutines for concurrent reconciliation controllers
+- Deep Kubernetes integration via client-go informers and CRDs
+- Error wrapping with context for distributed debugging
+*/

@@ -10,6 +10,9 @@ import (
 func main() {
 	fmt.Println("=== PAQUETES EN GO ===")
 
+	// ============================================
+	// ESTRUCTURA, DECLARACIÓN E IMPORTS
+	// ============================================
 	fmt.Println(`
 Los paquetes son la unidad fundamental de organización en Go.
 Cada archivo .go pertenece a un paquete.
@@ -249,7 +252,9 @@ EVITAR:
 
 5. Acoplar paquetes innecesariamente
    → Interfaces en el consumidor`)
-	// Ejemplo de estructura de paquete
+	// ============================================
+	// EJEMPLO DE ESTRUCTURA DE PAQUETE
+	// ============================================
 	fmt.Println("\n--- Ejemplo de Estructura ---")
 
 	fmt.Println(`
@@ -354,4 +359,45 @@ EVITAR:
 - Dependencias circulares
 - Paquetes gigantes
 - Nombres genéricos (util, common)
+*/
+
+/*
+SUMMARY - CHAPTER 026: PACKAGES
+
+PACKAGE BASICS:
+- Packages are Go's fundamental unit of code organization
+- Each .go file belongs to a package
+- First line: package declaration
+- Package names should be lowercase, no underscores
+
+IMPORTS:
+- Import single or multiple packages
+- Import with alias, blank import for side effects
+- Import local packages with module path
+
+VISIBILITY:
+- Uppercase = exported (public)
+- Lowercase = unexported (private)
+- Applies to functions, types, constants, variables
+
+INITIALIZATION:
+- init() functions run automatically on import
+- Multiple init() allowed per file/package
+- Execution order: imported packages → current package → main()
+
+STRUCTURE:
+- cmd/ for executables
+- internal/ for private packages (import restricted)
+- pkg/ for public reusable code
+- vendor/ for local dependency copies
+
+DOCUMENTATION:
+- Comments above package/functions appear in godoc
+- go doc to view documentation
+
+BEST PRACTICES:
+- Avoid circular dependencies
+- Keep packages focused and cohesive
+- Use descriptive names, avoid generic util/common
+- Don't store context in structs
 */

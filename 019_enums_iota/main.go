@@ -417,3 +417,41 @@ BUENAS PRÁCTICAS:
 6. Para bit flags, usa potencias de 2 (1 << iota)
 7. Documenta los valores válidos
 */
+
+/*
+SUMMARY - ENUMS AND IOTA:
+
+IOTA BÁSICO:
+- Contador que empieza en 0 y se incrementa en cada const
+- Se reinicia en cada bloque const
+- Se puede ignorar con _ = iota
+
+ENUM TIPADO (Patrón recomendado):
+- type Estado int + const ( EstadoX Estado = iota; ... )
+- Provee type safety vs int puro
+- Implementar String() para debugging
+
+IOTA CON EXPRESIONES:
+- Tamaños: KB = 1 << (10 * iota) para KB, MB, GB, TB
+- Permisos Unix: Read = 1 << iota para bit flags
+
+ENUM CON STRINGS:
+- type Role string + const ( Admin Role = "admin"; ... )
+- Fácil serialización a JSON y bases de datos
+
+BIT FLAGS:
+- Combinar: perms = Read | Write
+- Verificar: perms & Read != 0
+- Agregar: perms | Execute
+- Quitar: perms &^ Write
+- Toggle: perms ^ Read
+
+VALIDACIÓN:
+- Sentinel value (estadoMax) para validar rango
+- IsValid() función para verificar valores
+- Go no previene valores inválidos, validar manualmente
+
+MÁQUINA DE ESTADOS:
+- Map de transiciones válidas por estado
+- Métodos EsFinal(), Siguiente() en el tipo enum
+*/
